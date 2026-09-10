@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers | SevaGo</title>
+
+<!-- OG / Social sharing meta tags -->
+<meta name="description" content="Join SevaGo's internship program. Work on real products at a growing Indian startup — hybrid, Coimbatore on-site opportunity, 8 weeks.">
+<meta property="og:type"        content="website">
+<meta property="og:title"       content="Careers | SevaGo">
+<meta property="og:description" content="Join SevaGo's internship program. Work on real products at a growing Indian startup — hybrid, Coimbatore on-site opportunity, 8 weeks.">
+<meta property="og:image"       content="https://sevago.co.in/og-image.jpg">
+<meta property="og:url"         content="https://sevago.co.in/careers.html">
+<meta property="og:site_name"   content="SevaGo">
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Careers | SevaGo">
+<meta name="twitter:description" content="Join SevaGo's internship program. Hybrid, Coimbatore on-site opportunity, 8 weeks.">
+<meta name="twitter:image"       content="https://sevago.co.in/og-image.jpg">
+
+<!-- Favicon — SevaGo sGJ logo -->
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAADcklEQVR4nO1Vz0tqWxTeP84xUsksSA2KkKgwQx+BNDHIQOovcJA0LhpIg6CREARFUESBk8ZOekTZRAIhMMtJkU00pPDQIEQHGv04KufsdQfn1vXevGb38iaPvtHZh73W/ta39vo2Ql/4wv8bGGOM8Qd7PpWREEIIAQBZlv+C2G9AKa1ems3m8/PzQCCAXkupWQ3X+AGyLPf09LhcLkrpzs6OWq0eHh4WRREhBACfYIoxppQSQiilb9Q4jltaWsrlcgCQTqcRQhaLpVwuh8NhhJBKpTKZTHq9vqHsv/whhGCMA4EAAAiCsLa2NjExgRCyWq0AEIvFEEI2m+3p6enf3V1lf3X4TxJhjAHAaDT6fL7+/v5EIrG1tVUsFj0ez8zMzMXFhdfrvb6+VrKUSqWrq6tUKqUsNRpNs0b9AXeMsVarjUQikiQVCgUAOD091el04XC4VCo5nU5FjfexNpuNMRYKhepVQAiRZXlkZMTpdAaDQb/fPz09bbFYhoaG+vr6EolELBajlFYqFa1W293dzRjjeV4UxZubm5ra1pBIAQDwPK/T6ba3t4vFYldXV2trazqdBgAli8vlCoVCDw8ParX65ORkfHwcE4x+c5d+lMMYwxjH4/Hj42OPxxOPx5PJpNfrzWazuVxuYGCgra2NMUYpLRaLZ2dniURCkqTvE9fgLVUItrS0LC4uBoNBQRCy2axer19dXQWAlZWV6s0mk6lUKh0dHSGE7P/YGbD9/X30rgc/FpRSABgbGzs8PCwUClNTU5FIpL293Wq1bmxsCIIwPz+/vr7e29vb3NxsMBhmZ2cxxm+eAQwYY/XoKydbLJbHx0dBEDY3N1Op1P39vdlsRgiNjo6mUikAyOfzl5eXmUxGFEVRFCORCELIbrdLkrS3t1evAsYYISSZTPp8Pkrp3NycXq/3+/2ZTKapqSkajbrd7uXl5XQ6rdO1MsZub2/z+XyhUOA4DgAYYw0ZhtKGzs5Oh8PR0OgjhBAaHBysVCq7H07ym1YqlcpgMHR0dGg0mldqmOMIpVSSZEV3hQqllOO4yclJnuffhrxeM3ieRwgtLCwAQLlclmWZMaacUR/RaNRoNL437RrWxhhzOBxut/vl5aX6DaiOrP4mhNzd3R0cHDw/Pytu9pGif4qablHbQJSn8VPZZVn+D7l/4W/wDSZYvHkYIQQnAAAAAElFTkSuQmCC">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+/* ── PAGE LOAD FADE-IN ───────────────────── */
+body{opacity:0;transition:opacity .4s ease;}
+body.loaded{opacity:1;}
+
+/* ═══════════════════════════════════════════
+   RESET & VARIABLES
+═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:       #0539A2;
+  --blue-light: #0A52CC;
+  --blue-pale:  rgba(5,57,162,0.12);
+  --gold:       #FFC107;
+  --gold-dark:  #E6AC00;
+  --gold-pale:  rgba(255,193,7,0.15);
+  --navy:       #16213E;
+  --navy2:      #0F1729;
+  --white:      #FFFFFF;
+  --off-white:  #F0F4FF;
+  --green:      #00C853;
+  --green-pale: rgba(0,200,83,0.12);
+  --muted:      rgba(255,255,255,0.5);
+  --muted-dark: rgba(5,57,162,0.45);
+  --border-dark:rgba(255,255,255,0.09);
+  --border-light:rgba(5,57,162,0.13);
+}
+
+/* ══ SCROLL PROGRESS BAR ══════════════════ */
+#scroll-progress-bar{
+  position:fixed;
+  top:0;left:0;
+  height:3px;
+  width:0%;
+  background:linear-gradient(to right, var(--gold), #FFD700);
+  z-index:9999;
+  transition:width .08s linear;
+  box-shadow:0 0 8px rgba(255,193,7,0.6);
+  border-radius:0 2px 2px 0;
+  pointer-events:none;
+}
+
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--blue);
+  color:var(--white);
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+/* ═══════════════════════════════════════════
+   NAV (shared with index.html)
+═══════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 5%;
+  transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+  overflow:visible;
+}
+nav.scrolled{
+  background:var(--navy2);
+  box-shadow:0 2px 24px rgba(0,0,0,0.35);
+  padding:.9rem 5%;
+}
+.nav-logo{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.5rem;font-weight:800;
+  color:var(--white);
+  letter-spacing:-0.03em;
+  display:flex;align-items:center;gap:10px;
+  z-index:201;
+}
+.logo-badge{
+  width:34px;height:34px;border-radius:9px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.78rem;font-weight:800;
+  color:var(--navy);
+  font-family:'Bricolage Grotesque',sans-serif;
+  flex-shrink:0;
+  overflow:hidden;
+}
+.nav-links{
+  display:flex;align-items:center;gap:2.2rem;
+  overflow:visible;
+}
+.nav-links a{
+  font-size:.95rem;font-weight:400;
+  color:rgba(255,255,255,0.7);
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a.nav-active{color:var(--gold);}
+.nav-cta-btn{
+  background:var(--gold)!important;
+  color:var(--navy)!important;
+  font-weight:700!important;
+  padding:.55rem 1.3rem;
+  border-radius:100px;
+  transition:background .2s,transform .15s!important;
+}
+.nav-cta-btn:hover{background:var(--gold-dark)!important;transform:scale(1.04);}
+
+.hamburger{
+  display:none;
+  flex-direction:column;gap:5px;cursor:pointer;
+  z-index:201;padding:4px;
+}
+.hamburger span{
+  display:block;width:26px;height:2px;
+  background:var(--white);
+  border-radius:2px;
+  transition:transform .3s,opacity .3s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* MOBILE MENU */
+.mobile-menu{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:var(--navy2);
+  z-index:199;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:2.5rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .35s ease;
+}
+.mobile-menu.open{opacity:1;pointer-events:all;}
+.mobile-menu a{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:2.2rem;font-weight:800;
+  color:var(--white);
+  letter-spacing:-0.03em;
+  transition:color .2s;
+}
+.mobile-menu a:hover{color:var(--gold);}
+.mobile-menu-close{
+  position:absolute;
+  top:1.4rem;right:1.4rem;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  color:rgba(255,255,255,0.8);
+  width:44px;height:44px;border-radius:12px;
+  font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s, color .2s;
+  font-family:'DM Sans',sans-serif;
+}
+.mobile-menu-close:hover{background:rgba(255,255,255,0.2);color:#fff;}
+
+/* ═══════════════════════════════════════════
+   SECTION REVEAL
+═══════════════════════════════════════════ */
+.reveal{
+  opacity:0;
+  transform:translateY(64px);
+  transition:opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1);
+}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ═══════════════════════════════════════════
+   SHARED SECTION TITLE STYLES
+═══════════════════════════════════════════ */
+.section-eyebrow{
+  font-size:.75rem;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.2rem;
+}
+.section-title{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:800;letter-spacing:-.03em;
+  color:var(--white);line-height:.95;
+  margin-bottom:1.5rem;
+}
+.section-title .gold{color:var(--gold);}
+.section-sub{
+  font-size:1.1rem;font-weight:300;
+  color:rgba(255,255,255,0.55);line-height:1.7;
+  max-width:640px;
+}
+
+/* ═══════════════════════════════════════════
+   CAREERS HERO
+═══════════════════════════════════════════ */
+#careers-hero{
+  background:var(--blue);
+  padding:9.5rem 5% 5rem;
+  position:relative;overflow:hidden;
+}
+#careers-hero::before{
+  content:'';
+  position:absolute;
+  width:600px;height:600px;border-radius:50%;
+  background:rgba(255,193,7,0.08);
+  right:-180px;top:-180px;
+  pointer-events:none;
+}
+.careers-hero-inner{position:relative;z-index:1;max-width:820px;}
+.careers-h1{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(2.4rem,5.5vw,4.4rem);
+  font-weight:800;letter-spacing:-.04em;
+  color:var(--white);line-height:.98;
+  margin-bottom:1.4rem;
+}
+.careers-h1 .gold{color:var(--gold);}
+.careers-hero-sub{
+  font-size:1.15rem;font-weight:300;
+  color:rgba(255,255,255,0.6);line-height:1.75;
+  max-width:600px;margin-bottom:2rem;
+}
+.careers-chips{display:flex;flex-wrap:wrap;gap:.6rem;}
+.careers-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.18);
+  color:rgba(255,255,255,0.85);
+  border-radius:100px;
+  padding:.5rem .95rem;
+  font-size:.82rem;font-weight:500;
+}
+.careers-chip .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* ═══════════════════════════════════════════
+   WHY INTERN — CARD GRID
+═══════════════════════════════════════════ */
+#why-intern{
+  background:var(--navy);
+  padding:6rem 5%;
+  position:relative;overflow:hidden;
+}
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin-top:3rem;
+}
+.why-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  padding:1.2rem 1.3rem;
+  display:flex;align-items:flex-start;gap:.7rem;
+  transition:background .2s, border-color .2s, transform .15s;
+}
+.why-card:hover{
+  background:rgba(255,193,7,0.06);
+  border-color:rgba(255,193,7,0.25);
+  transform:translateY(-2px);
+}
+.why-card-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);flex-shrink:0;margin-top:7px;
+}
+.why-card-text{
+  font-size:.9rem;color:rgba(255,255,255,0.75);line-height:1.5;
+}
+
+/* ═══════════════════════════════════════════
+   OPEN POSITIONS
+═══════════════════════════════════════════ */
+#positions{
+  background:var(--navy2);
+  padding:6rem 5%;
+  position:relative;overflow:hidden;
+}
+#positions::before{
+  content:'';
+  position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  background:rgba(255,193,7,0.06);
+  left:-150px;bottom:-150px;
+  pointer-events:none;
+}
+.positions-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+  margin-top:3rem;
+  position:relative;z-index:1;
+}
+.job-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:24px;
+  padding:2rem;
+  display:flex;flex-direction:column;
+  transition:background .2s, border-color .2s, transform .15s;
+}
+.job-card:hover{
+  background:rgba(255,255,255,0.06);
+  border-color:rgba(255,193,7,0.25);
+  transform:translateY(-4px);
+}
+.job-card-tag{
+  display:inline-block;
+  background:var(--gold-pale);
+  border:1px solid rgba(255,193,7,0.3);
+  color:var(--gold);
+  font-size:.68rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 12px;border-radius:100px;
+  margin-bottom:1rem;width:fit-content;
+}
+.job-card-title{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.25rem;font-weight:700;color:var(--white);
+  letter-spacing:-.02em;line-height:1.25;
+  margin-bottom:.8rem;
+}
+.job-card-desc{
+  font-size:.9rem;color:rgba(255,255,255,0.5);
+  line-height:1.65;margin-bottom:1.6rem;flex-grow:1;
+}
+.job-apply-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--gold);color:var(--navy2);
+  font-weight:700;font-family:'DM Sans',sans-serif;
+  padding:.75rem 1.3rem;border-radius:100px;
+  font-size:.9rem;
+  transition:background .2s,transform .15s;
+  text-decoration:none;
+}
+.job-apply-btn:hover{background:var(--gold-dark);transform:scale(1.03);}
+
+/* ═══════════════════════════════════════════
+   CREDIBILITY STRIP
+═══════════════════════════════════════════ */
+#credibility{
+  background:var(--navy);
+  padding:3rem 5%;
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  gap:1rem 2rem;
+  text-align:center;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.aic-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(255,193,7,0.08);
+  border:1px solid rgba(255,193,7,0.2);
+  color:rgba(255,193,7,0.85);
+  border-radius:999px;
+  padding:.4rem .9rem;
+  font-size:.78rem;font-weight:600;white-space:nowrap;
+}
+.credibility-note{
+  font-size:.85rem;color:rgba(255,255,255,0.4);
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER (shared with index.html)
+═══════════════════════════════════════════ */
+.footer{
+  background:var(--navy2);
+  padding:3rem 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1.5rem;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.footer-brand{
+  display:flex;flex-direction:column;gap:.5rem;
+}
+.footer-logo{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.3rem;font-weight:800;color:var(--white);
+  letter-spacing:-.03em;
+  display:flex;align-items:center;gap:8px;
+}
+.footer-logo .badge{
+  width:28px;height:28px;border-radius:7px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:800;color:var(--navy);
+  overflow:hidden;
+}
+.footer-tagline{
+  font-size:.82rem;
+  color:rgba(255,255,255,0.3);
+  font-style:italic;
+  letter-spacing:.02em;
+  padding-left:2px;
+}
+.social-icon{
+  color:rgba(255,255,255,0.4);
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  border:1px solid rgba(255,255,255,0.1);
+  transition:color .2s,border-color .2s,background .2s;
+  flex-shrink:0;
+}
+.social-icon:hover{
+  color:var(--gold);
+  border-color:rgba(255,193,7,0.35);
+  background:rgba(255,193,7,0.08);
+}
+.footer-links{display:flex;gap:2rem;flex-wrap:wrap;}
+.footer-links a{
+  font-size:.83rem;color:rgba(255,255,255,0.35);
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{
+  width:100%;
+  display:flex;justify-content:space-between;flex-wrap:wrap;
+  gap:1rem;
+  font-size:.75rem;color:rgba(255,255,255,0.2);
+  padding-top:1.5rem;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .why-grid{grid-template-columns:repeat(2,1fr);}
+  .positions-grid{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  #careers-hero{padding:8rem 5% 3.5rem;}
+  #why-intern,#positions{padding:4rem 5%;}
+  .why-grid{grid-template-columns:1fr;}
+  .section-title{margin-bottom:1.2rem;}
+  #credibility{flex-direction:column;text-align:center;}
+  .footer{padding:2.5rem 5%;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── SCROLL PROGRESS BAR ── -->
+<div id="scroll-progress-bar"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-badge"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAH0AfQDASIAAhEBAxEB/8QAGgABAAMBAQEAAAAAAAAAAAAAAAMFBgEEAv/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAALPgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO/ZGkEb6+QAAAAAAAAAAAAAAAAAAAAAAAAAAAAD363Ja0Apc7os6AAAAAAAAAAAAAAAAAAAAAAAAC1KqbU+wzPpvRn6TYY8A9+tyWtAKXO6LOgAAAAAAAAAAAAAAAAAAAAAAD0Sao83tAB3g8uP2GPAPfrMnrDvAps7os6AFpZmYacZh6/IAAAAAAAAAAAAAD7Ph6YT4AAA9EGuJpeDp8n15qWoLzw+ETQgB79Zk9YAU2d0WdAL6+ob4AyldY1wAAAAAAAAAAAA9/p0B4/YHeB5KLUdMMvKMHS30MMwOnxlZ6sAAAA9+twfTdMKNDnQAvr6hvgEyldZVqgAAAAAAAAAAPZ49MWPeDrnnPSp/aesHcxp/IZGwr78ugPD7swVoAAAAAAAAL69or07wMtW2NcAAAAAAAAAAANnjNqfXeD5x2txw7waD7zg0bOBqMvrD2gYrZ4gAAA7240BiG3GIbfph24GF5oc8AXt9RXoBla6xrgAAAAAAAAAABrsjdF6DtLc9MnzWjE/O1pClA1eU0paA5iNxkTyAAAutBQX4AB1wU2e0OeAL2+ob5AXK11jXAAAAAAAAAAADvBrPXjNGWAOudAKzNbnOFTc005se86KW6+DEpoQAC2uMiNcyI2PpyesAKbPaHPAF7fUN8AZWusa4AAAAAAAAAAAO3RSLwV3v7SF97sn026GYeX1DDvr5NRYZHWn0508OV3HhMokjAAAPfq85owCmz2hzwBe3tFep1wuWrrGuAAAAAAAAAAAO7TFas9gGK2tWZx6bAtPWAgMh8gvKMbjtTanQR0egGKj3PmMe1khlbu46c6AFNntDngC9vaK9AMtXWNcAAAAAAAAAAALSrG3V9gAAO8CkssmfIAF7RDcdyWgPaAAAB3g64KfPaHPAF7e0V6AZausa4AAAAAAAAAAAA+tBnRtu5GxL1URl3X0njJIwAAAA9llQjV+jGDb9w427EDb8xI2rFC+oQAvb2ivQDLV1jXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsCyt/n6AMn4pIwAAAAAAAAAAAAD3aTN6kiSiHsoiSiLkwhTCJMIeyiJKIkoiSiNJ0iSiJKIuyD4k4AFd7ckecAAAAAAAAAAAAAHv1GV0hMgE6ETIRMhEyETdgE6AToBOgE6ETIROgE6AToBO8/nLCCkqj0+QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACAAMAAAAhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAgAAAAAAAAAAAAAAAAAAAAAAAAIQEAAoAAAAAAAAAAAAAAAAAAAAAAAAAEQ0sAA8cAAEMAAAAAAAAAAAAAAEAAAAQsAMgAA88AAAwIAAAAAAAAAAAAAQUYIA04IAAAAgwIAABgAAAAAAAAAAAQsMA0kA0sAAAAAAAAAUcIAAAAAAAAAAAMsgAgQkUoAAAUMIAoA08oAAAAAAAAAAAA0YUMIAA8AAAg88MoApwoAAAAAAAAAAAQw8I0AEoEAAAAAc8oAoAoAAAAAAAAAAAMAwUQwAUIwIAAAc4gA9MoAAAAAAAAAAAA0IAAAgEkAEAAIgAAA88oAAAAAAAAAAAUAQ0s0AAgIAQ08sMAAgwoAAAAAAAAAAAAAkAQgAAAAAAgwAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA84oAAAAAAAAAAAAAIAgMc8Qgs88IAwss44AAAAAAAAAAAAAAIMAQw0sMM8wwAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIAAwAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBAgAAAAAAAAAAAAAAAAAAAAAAAABBggAACgAAAAAAAAAAAAAAAAAAAAAAABziQgBxwAAAAgAAAAAAAAAAAAAQQAABCzADCADTiADQygAAAAAAAAAAABwwjwACDjAAAAAxQACDGAAAAAAAAAAABSwhxhAQjQAAAAAAAABRwgAAAAAAAAAADSwhCACShQAAAAxjwACDCgAAAAAAAAAAADwigABTC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" alt="SevaGo" style="width:100%;height:100%;object-fit:cover;border-radius:9px;"/></div>
+    SevaGo
+  </a>
+  <div class="nav-links">
+    <a href="index.html#how">How it works</a>
+    <a href="index.html#reviews">Reviews</a>
+    <a href="index.html#cities">Cities</a>
+    <a href="index.html#investors">Investors</a>
+    <a href="careers.html" class="nav-active">Careers</a>
+    <a href="index.html#contact">Contact Us</a>
+    <a href="https://play.google.com/store/apps/details?id=com.app.initio.sevago&hl=en_IN" target="_blank" rel="noopener" class="nav-cta-btn">Get the App</a>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html#how" onclick="closeMenu()">How it works</a>
+  <a href="index.html#reviews" onclick="closeMenu()">Reviews</a>
+  <a href="index.html#cities" onclick="closeMenu()">Cities</a>
+  <a href="index.html#investors" onclick="closeMenu()">Investors</a>
+  <a href="careers.html" onclick="closeMenu()" style="color:var(--gold)">Careers</a>
+  <a href="index.html#contact" onclick="closeMenu()">Contact Us</a>
+  <a href="https://play.google.com/store/apps/details?id=com.app.initio.sevago&hl=en_IN" target="_blank" rel="noopener" onclick="closeMenu()" style="color:var(--gold)">Get the App →</a>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section id="careers-hero">
+  <div class="careers-hero-inner">
+    <div class="careers-h1">Build with <span class="gold">SevaGo</span></div>
+    <p class="careers-hero-sub">Help us build the future of local services in India. Work on real products, solve real problems, and learn inside a growing startup.</p>
+    <div class="careers-chips">
+      <span class="careers-chip"><span class="dot"></span>8-Week Internship</span>
+      <span class="careers-chip"><span class="dot"></span>Hybrid</span>
+      <span class="careers-chip"><span class="dot"></span>On-site opportunity in Coimbatore</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     WHY INTERN AT SEVAGO
+═══════════════════════════════════════════ -->
+<section id="why-intern" class="reveal">
+  <div class="section-eyebrow">Why Join Us</div>
+  <div class="section-title">Why intern at <span class="gold">SevaGo?</span></div>
+  <p class="section-sub">A hands-on internship where you actually build things — not fetch coffee.</p>
+  <div class="why-grid">
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">8-week hands-on experience</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Hybrid work model</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">On-site opportunity in Coimbatore</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Work on real startup projects</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Build production-level skills</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Learn from founders and experienced team members</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Exposure to startup operations and decision-making</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Opportunity to work across multiple functions</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Build a portfolio of real work</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Internship certificate upon successful completion</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Letter of recommendation based on performance</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Networking with the SevaGo team and startup ecosystem</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Potential opportunities for future roles at SevaGo</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Learning-focused environment</span></div>
+    <div class="why-card"><span class="why-card-dot"></span><span class="why-card-text">Meaningful responsibilities instead of routine busywork</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     OPEN POSITIONS
+═══════════════════════════════════════════ -->
+<section id="positions" class="reveal">
+  <div class="section-eyebrow">Open Roles</div>
+  <div class="section-title">Open <span class="gold">Positions</span></div>
+  <p class="section-sub">Three tracks open right now. Pick the one that fits what you want to build.</p>
+  <div class="positions-grid">
+    <div class="job-card">
+      <span class="job-card-tag">Design</span>
+      <div class="job-card-title">SevaGo | UI/UX Product Design Intern</div>
+      <p class="job-card-desc">Shape how people experience SevaGo — from wireframes to polished screens. You'll work closely with the product team on real features used by real users.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScbOwr5Zq_7w_FK3kdJvt4zP1VAywNgPxKF7PDDUXfMCVGDiw/viewform" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Apply Now →</a>
+    </div>
+    <div class="job-card">
+      <span class="job-card-tag">Engineering</span>
+      <div class="job-card-title">SevaGo | Backend Engineer Intern</div>
+      <p class="job-card-desc">Help build and scale the systems that power SevaGo's marketplace. You'll get hands-on exposure to real production infrastructure and problem-solving.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdScHh4l4Se2nOIWW0ugvMS1e5eOyp7_bKUe96g2By17TiKRQ/viewform" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Apply Now →</a>
+    </div>
+    <div class="job-card">
+      <span class="job-card-tag">Mobile</span>
+      <div class="job-card-title">SevaGo | Flutter Developer Intern</div>
+      <p class="job-card-desc">Work on the SevaGo mobile app that thousands of people use to get tasks done. A great chance to sharpen your Flutter skills on a live product.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScNp8V-my-vZ6hMyUzBqAqdoJlfwuCDh2plqgI4PQnrZHjezg/viewform" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Apply Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CREDIBILITY STRIP
+═══════════════════════════════════════════ -->
+<section id="credibility">
+  <span class="aic-badge">Incubated by AIC RAISE</span>
+  <span class="credibility-note">Currently in Bengaluru. Expanding to Coimbatore, Chennai and Kochi.</span>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-brand">
+    <div class="footer-logo">
+      <div class="badge">SG</div>
+      SevaGo
+    </div>
+    <p class="footer-tagline">Tasks Done In Minutes.</p>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="careers.html">Careers</a>
+    <a href="mailto:hello@sevago.co.in">hello@sevago.co.in</a>
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/sevago.india/" target="_blank" rel="noopener" aria-label="SevaGo on Instagram" class="social-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+        <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+      </svg>
+    </a>
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/company/sevagoindia/" target="_blank" rel="noopener" aria-label="SevaGo on LinkedIn" class="social-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="20" height="20" rx="3" ry="3" stroke="currentColor" stroke-width="2"/>
+        <path d="M7 10v7M7 7v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M11 17v-4a2 2 0 0 1 4 0v4M11 10v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+  <div style="width:100%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:flex-start;font-size:.72rem;line-height:1.6;color:rgba(255,255,255,0.25);padding-top:1.25rem;">
+    <div>
+      SevaGo Technologies Pvt. Ltd.<br>
+      Office: SF.No.688/3, 688/4, 688/1A1A2C and 688/1B1A, Kurichi Village, Coimbatore - 641 021
+    </div>
+    <span style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,193,7,0.08);border:1px solid rgba(255,193,7,0.2);color:rgba(255,193,7,0.75);border-radius:999px;padding:.35rem .8rem;font-weight:600;white-space:nowrap;">Incubated by AIC RAISE</span>
+  </div>
+  <div class="footer-copy">
+    <span>© 2026 SevaGo Technologies Pvt. Ltd. All rights reserved.</span>
+    <span>🇮🇳 Built with 💙 in India</span>
+  </div>
+</footer>
+
+<script>
+/* ── STICKY NAV ──────────────────────────── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ── HAMBURGER MENU ──────────────────────── */
+const ham = document.getElementById('hamburger');
+const mob = document.getElementById('mobileMenu');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+});
+function closeMenu() {
+  ham.classList.remove('open');
+  mob.classList.remove('open');
+}
+
+/* ── SCROLL REVEAL ───────────────────────── */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach((el) => revealObs.observe(el));
+
+/* ── SCROLL PROGRESS BAR ─────────────────── */
+(function(){
+  var bar = document.getElementById('scroll-progress-bar');
+  if(!bar) return;
+  function updateBar(){
+    var scrollTop = window.scrollY;
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+    bar.style.width = Math.min(100, pct) + '%';
+  }
+  window.addEventListener('scroll', updateBar, {passive:true});
+  updateBar();
+})();
+
+/* ── PAGE LOAD FADE-IN ───────────────────── */
+window.addEventListener('load', function() {
+  document.body.classList.add('loaded');
+});
+</script>
+
+<!-- ═══════════════════════════════════════════
+     OFFLINE DETECTION OVERLAY (SevaGo)
+═══════════════════════════════════════════ -->
+<style>
+#sevago-offline-overlay{
+  position:fixed;inset:0;z-index:99999;
+  background:linear-gradient(160deg,#0F1729 0%,#0A1120 100%);
+  color:#FFFFFF;
+  font-family:'DM Sans',sans-serif;
+  display:none;
+  align-items:center;justify-content:center;
+  padding:6% 5%;
+  overflow-y:auto;
+}
+#sevago-offline-overlay.sg-offline-visible{display:flex;}
+.sg-offline-card{
+  width:100%;max-width:480px;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+}
+.sg-offline-icon-wrap{
+  width:64px;height:64px;border-radius:18px;
+  background:rgba(255,193,7,0.12);
+  border:1px solid rgba(255,193,7,0.3);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.6rem;
+}
+.sg-offline-h1{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(1.6rem,5vw,2.1rem);
+  font-weight:800;letter-spacing:-.02em;
+  margin-bottom:.6rem;
+}
+.sg-offline-sub{
+  font-size:1rem;font-weight:500;
+  color:#FFC107;margin-bottom:.9rem;
+}
+.sg-offline-body{
+  font-size:.9rem;font-weight:300;line-height:1.7;
+  color:rgba(255,255,255,0.6);
+  margin-bottom:1.8rem;
+  max-width:400px;
+}
+.sg-offline-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#FFC107;color:#16213E;
+  font-weight:700;font-family:'DM Sans',sans-serif;
+  padding:.85rem 2rem;border-radius:100px;
+  font-size:.95rem;border:none;cursor:pointer;
+  transition:background .2s,transform .15s;
+}
+.sg-offline-btn:hover{background:#E6AC00;transform:translateY(-2px);}
+.sg-offline-btn:active{transform:translateY(0);}
+.sg-offline-hint{
+  font-size:.78rem;color:rgba(255,255,255,0.35);
+  margin-top:.9rem;margin-bottom:2rem;
+}
+.sg-offline-status{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:14px;
+  padding:1rem 1.2rem;
+  margin-bottom:1.2rem;
+  text-align:left;
+}
+.sg-offline-status-label{
+  font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);
+  margin-bottom:.5rem;
+}
+.sg-offline-status-row{
+  display:flex;align-items:center;gap:.6rem;
+  font-size:.88rem;font-weight:500;color:#fff;
+}
+.sg-offline-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#FF6B6B;flex-shrink:0;
+  animation:sg-offline-pulse 1.4s ease-in-out infinite;
+}
+@keyframes sg-offline-pulse{
+  0%,100%{opacity:1;}
+  50%{opacity:.35;}
+}
+.sg-offline-todo{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:14px;
+  padding:1.1rem 1.3rem;
+  text-align:left;
+}
+.sg-offline-todo-label{
+  font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);
+  margin-bottom:.7rem;
+}
+.sg-offline-todo ul{
+  list-style:none;
+  display:flex;flex-direction:column;gap:.6rem;
+}
+.sg-offline-todo li{
+  font-size:.85rem;color:rgba(255,255,255,0.7);
+  line-height:1.5;
+  display:flex;align-items:flex-start;gap:.55rem;
+}
+.sg-offline-todo li::before{
+  content:'';
+  width:5px;height:5px;border-radius:50%;
+  background:#FFC107;flex-shrink:0;margin-top:7px;
+}
+@media(max-width:480px){
+  #sevago-offline-overlay{padding:8% 6%;}
+  .sg-offline-card{max-width:100%;}
+}
+</style>
+<div id="sevago-offline-overlay" role="alert" aria-live="assertive">
+  <div class="sg-offline-card">
+    <div class="sg-offline-icon-wrap">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 9a16 16 0 0 1 22 0" stroke="#FFC107" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+        <path d="M5 13a10 10 0 0 1 14 0" stroke="#FFC107" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+        <path d="M9 17a4 4 0 0 1 6 0" stroke="#FFC107" stroke-width="2" stroke-linecap="round"/>
+        <line x1="2" y1="2" x2="22" y2="22" stroke="#FFC107" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="sg-offline-h1">You are offline</div>
+    <div class="sg-offline-sub">SevaGo is waiting for your connection.</div>
+    <p class="sg-offline-body">The app automatically returns as soon as your internet connection is back. Until then, this screen prevents partial loads and broken requests.</p>
+    <button class="sg-offline-btn" id="sgOfflineRetryBtn" type="button">Try again</button>
+    <p class="sg-offline-hint">Switch to Wi-Fi or mobile data and SevaGo will resume automatically.</p>
+    <div class="sg-offline-status">
+      <div class="sg-offline-status-label">Connection status</div>
+      <div class="sg-offline-status-row"><span class="sg-offline-dot"></span><span id="sgOfflineStatusText">Waiting for network access</span></div>
+    </div>
+    <div class="sg-offline-todo">
+      <div class="sg-offline-todo-label">What you can do</div>
+      <ul>
+        <li>Check whether mobile data or Wi-Fi is enabled.</li>
+        <li>Move to an area with stronger coverage if signal is weak.</li>
+        <li>Tap Try again after reconnecting if SevaGo does not switch immediately.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var overlay = document.getElementById('sevago-offline-overlay');
+  if(!overlay) return;
+  var retryBtn = document.getElementById('sgOfflineRetryBtn');
+  var statusText = document.getElementById('sgOfflineStatusText');
+
+  function showOverlay(){
+    overlay.classList.add('sg-offline-visible');
+    if(statusText) statusText.textContent = 'Waiting for network access';
+  }
+  function hideOverlay(){
+    overlay.classList.remove('sg-offline-visible');
+  }
+
+  window.addEventListener('offline', showOverlay);
+  window.addEventListener('online', hideOverlay);
+
+  if(retryBtn){
+    retryBtn.addEventListener('click', function(){
+      if(statusText) statusText.textContent = 'Checking connection…';
+      if(navigator.onLine){
+        fetch(window.location.href, {method:'HEAD', cache:'no-store'})
+          .then(function(){ hideOverlay(); })
+          .catch(function(){ if(statusText) statusText.textContent = 'Still waiting for network access'; });
+      } else {
+        setTimeout(function(){
+          if(statusText) statusText.textContent = 'Still waiting for network access';
+        }, 500);
+      }
+    });
+  }
+
+  if(navigator.onLine === false){
+    showOverlay();
+  }
+})();
+</script>
+
+</body>
+</html>

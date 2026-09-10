@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found | SevaGo</title>
+<meta name="robots" content="noindex">
+
+<!-- Favicon — SevaGo sGJ logo -->
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAADcklEQVR4nO1Vz0tqWxTeP84xUsksSA2KkKgwQx+BNDHIQOovcJA0LhpIg6CREARFUESBk8ZOekTZRAIhMMtJkU00pPDQIEQHGv04KufsdQfn1vXevGb38iaPvtHZh73W/ta39vo2Ql/4wv8bGGOM8Qd7PpWREEIIAQBZlv+C2G9AKa1ems3m8/PzQCCAXkupWQ3X+AGyLPf09LhcLkrpzs6OWq0eHh4WRREhBACfYIoxppQSQiilb9Q4jltaWsrlcgCQTqcRQhaLpVwuh8NhhJBKpTKZTHq9vqHsv/whhGCMA4EAAAiCsLa2NjExgRCyWq0AEIvFEEI2m+3p6enf3V1lf3X4TxJhjAHAaDT6fL7+/v5EIrG1tVUsFj0ez8zMzMXFhdfrvb6+VrKUSqWrq6tUKqUsNRpNs0b9AXeMsVarjUQikiQVCgUAOD091el04XC4VCo5nU5FjfexNpuNMRYKhepVQAiRZXlkZMTpdAaDQb/fPz09bbFYhoaG+vr6EolELBajlFYqFa1W293dzRjjeV4UxZubm5ra1pBIAQDwPK/T6ba3t4vFYldXV2trazqdBgAli8vlCoVCDw8ParX65ORkfHwcE4x+c5d+lMMYwxjH4/Hj42OPxxOPx5PJpNfrzWazuVxuYGCgra2NMUYpLRaLZ2dniURCkqTvE9fgLVUItrS0LC4uBoNBQRCy2axer19dXQWAlZWV6s0mk6lUKh0dHSGE7P/YGbD9/X30rgc/FpRSABgbGzs8PCwUClNTU5FIpL293Wq1bmxsCIIwPz+/vr7e29vb3NxsMBhmZ2cxxm+eAQwYY/XoKydbLJbHx0dBEDY3N1Op1P39vdlsRgiNjo6mUikAyOfzl5eXmUxGFEVRFCORCELIbrdLkrS3t1evAsYYISSZTPp8Pkrp3NycXq/3+/2ZTKapqSkajbrd7uXl5XQ6rdO1MsZub2/z+XyhUOA4DgAYYw0ZhtKGzs5Oh8PR0OgjhBAaHBysVCq7H07ym1YqlcpgMHR0dGg0mldqmOMIpVSSZEV3hQqllOO4yclJnuffhrxeM3ieRwgtLCwAQLlclmWZMaacUR/RaNRoNL437RrWxhhzOBxut/vl5aX6DaiOrP4mhNzd3R0cHDw/Pytu9pGif4qablHbQJSn8VPZZVn+D7l/4W/wDSZYvHkYIQQnAAAAAElFTkSuQmCC">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+/* ── PAGE LOAD FADE-IN ───────────────────── */
+body{opacity:0;transition:opacity .4s ease;}
+body.loaded{opacity:1;}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:       #0539A2;
+  --blue-light: #0A52CC;
+  --gold:       #FFC107;
+  --gold-dark:  #E6AC00;
+  --gold-pale:  rgba(255,193,7,0.15);
+  --navy:       #16213E;
+  --navy2:      #0F1729;
+  --white:      #FFFFFF;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--navy2);
+  color:var(--white);
+  overflow-x:hidden;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+/* ═══ NAV ═══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 5%;
+  background:var(--navy2);
+  box-shadow:0 2px 24px rgba(0,0,0,0.35);
+}
+.nav-logo{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.5rem;font-weight:800;
+  color:var(--white);letter-spacing:-0.03em;
+  display:flex;align-items:center;gap:10px;
+}
+.logo-badge{
+  width:34px;height:34px;border-radius:9px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.78rem;font-weight:800;color:var(--navy);
+  flex-shrink:0;
+}
+.nav-links{display:flex;align-items:center;gap:2.2rem;}
+.nav-links a{
+  font-size:.95rem;font-weight:400;
+  color:rgba(255,255,255,0.7);
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta-btn{
+  background:var(--gold)!important;
+  color:var(--navy)!important;
+  font-weight:700!important;
+  padding:.55rem 1.3rem;
+  border-radius:100px;
+  transition:background .2s,transform .15s!important;
+}
+.nav-cta-btn:hover{background:var(--gold-dark)!important;transform:scale(1.04);}
+
+.hamburger{
+  display:none;
+  flex-direction:column;gap:5px;cursor:pointer;
+  z-index:201;padding:4px;
+}
+.hamburger span{
+  display:block;width:26px;height:2px;
+  background:var(--white);border-radius:2px;
+  transition:transform .3s,opacity .3s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.mobile-menu{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:var(--navy2);z-index:199;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:2.5rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .35s ease;
+}
+.mobile-menu.open{opacity:1;pointer-events:all;}
+.mobile-menu a{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:2.2rem;font-weight:800;
+  color:var(--white);letter-spacing:-0.03em;
+  transition:color .2s;
+}
+.mobile-menu a:hover{color:var(--gold);}
+.mobile-menu-close{
+  position:absolute;top:1.4rem;right:1.4rem;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  color:rgba(255,255,255,0.8);
+  width:44px;height:44px;border-radius:12px;
+  font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s, color .2s;
+  font-family:'DM Sans',sans-serif;
+}
+.mobile-menu-close:hover{background:rgba(255,255,255,0.2);color:#fff;}
+
+/* ═══ 404 CONTENT ═══ */
+.notfound-main{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:9.5rem 6% 4rem;
+  position:relative;
+  overflow:hidden;
+}
+.notfound-main::before{
+  content:'';
+  position:absolute;
+  width:600px;height:600px;border-radius:50%;
+  background:rgba(255,193,7,0.06);
+  right:-200px;top:-160px;
+  pointer-events:none;
+}
+.notfound-main::after{
+  content:'';
+  position:absolute;
+  width:460px;height:460px;border-radius:50%;
+  background:rgba(5,57,162,0.35);
+  left:-160px;bottom:-180px;
+  pointer-events:none;
+}
+.notfound-inner{
+  position:relative;z-index:1;
+  max-width:620px;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+}
+.notfound-code{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:.95rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.3rem;
+}
+.notfound-icon{margin-bottom:1.6rem;}
+.notfound-h1{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(2rem,5vw,3rem);
+  font-weight:800;letter-spacing:-.03em;
+  line-height:1.1;color:var(--white);
+  margin-bottom:1.1rem;
+}
+.notfound-desc{
+  font-size:1.05rem;font-weight:300;
+  color:rgba(255,255,255,0.6);
+  line-height:1.7;
+  margin-bottom:2.3rem;
+  max-width:440px;
+}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold);color:var(--navy);
+  font-weight:700;font-family:'DM Sans',sans-serif;
+  padding:.9rem 2rem;border-radius:100px;
+  font-size:1rem;
+  transition:background .2s,transform .15s;
+}
+.btn-gold:hover{background:var(--gold-dark);transform:translateY(-2px);}
+
+/* ═══ FOOTER ═══ */
+.footer{
+  background:var(--navy2);
+  padding:2.2rem 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1.2rem;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.footer-logo{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.1rem;font-weight:800;color:var(--white);
+  letter-spacing:-.03em;
+  display:flex;align-items:center;gap:8px;
+}
+.footer-logo .badge{
+  width:26px;height:26px;border-radius:7px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:800;color:var(--navy);
+}
+.footer-copy{font-size:.75rem;color:rgba(255,255,255,0.3);}
+
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+}
+@media(max-width:560px){
+  .notfound-main{padding:8rem 6% 3rem;}
+  .footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-badge">SG</div>
+    SevaGo
+  </a>
+  <div class="nav-links">
+    <a href="index.html#how">How it works</a>
+    <a href="index.html#reviews">Reviews</a>
+    <a href="index.html#cities">Cities</a>
+    <a href="index.html#investors">Investors</a>
+    <a href="careers.html">Careers</a>
+    <a href="index.html#contact">Contact Us</a>
+    <a href="https://play.google.com/store/apps/details?id=com.app.initio.sevago&hl=en_IN" target="_blank" rel="noopener" class="nav-cta-btn">Get the App</a>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html#how" onclick="closeMenu()">How it works</a>
+  <a href="index.html#reviews" onclick="closeMenu()">Reviews</a>
+  <a href="index.html#cities" onclick="closeMenu()">Cities</a>
+  <a href="index.html#investors" onclick="closeMenu()">Investors</a>
+  <a href="careers.html" onclick="closeMenu()">Careers</a>
+  <a href="index.html#contact" onclick="closeMenu()">Contact Us</a>
+  <a href="https://play.google.com/store/apps/details?id=com.app.initio.sevago&hl=en_IN" target="_blank" rel="noopener" onclick="closeMenu()" style="color:var(--gold)">Get the App →</a>
+</div>
+
+<main class="notfound-main">
+  <div class="notfound-inner">
+    <div class="notfound-code">Error 404</div>
+    <div class="notfound-icon">
+      <svg width="88" height="88" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="44" cy="44" r="42" stroke="#FFC107" stroke-width="2" stroke-opacity="0.35"/>
+        <path d="M30 34c2-6 8-10 14-10s12 4 14 10" stroke="#FFC107" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="34" cy="46" r="3.2" fill="#FFC107"/>
+        <circle cx="54" cy="46" r="3.2" fill="#FFC107"/>
+        <path d="M32 60c4-3 8-4.5 12-4.5s8 1.5 12 4.5" stroke="#FFC107" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="notfound-h1">This page took a wrong turn.</div>
+    <p class="notfound-desc">The page you're looking for doesn't exist.</p>
+    <a href="index.html" class="btn-gold">Back to SevaGo →</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-logo">
+    <div class="badge">SG</div>
+    SevaGo
+  </div>
+  <div class="footer-copy">© 2026 SevaGo Technologies Pvt. Ltd. All rights reserved.</div>
+</footer>
+
+<script>
+const ham = document.getElementById('hamburger');
+const mob = document.getElementById('mobileMenu');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+});
+function closeMenu() {
+  ham.classList.remove('open');
+  mob.classList.remove('open');
+}
+window.addEventListener('load', function() {
+  document.body.classList.add('loaded');
+});
+</script>
+
+<!-- ═══════════════════════════════════════════
+     OFFLINE DETECTION OVERLAY (SevaGo)
+═══════════════════════════════════════════ -->
+<style>
+#sevago-offline-overlay{
+  position:fixed;inset:0;z-index:99999;
+  background:linear-gradient(160deg,#0F1729 0%,#0A1120 100%);
+  color:#FFFFFF;
+  font-family:'DM Sans',sans-serif;
+  display:none;
+  align-items:center;justify-content:center;
+  padding:6% 5%;
+  overflow-y:auto;
+}
+#sevago-offline-overlay.sg-offline-visible{display:flex;}
+.sg-offline-card{
+  width:100%;max-width:480px;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+}
+.sg-offline-icon-wrap{
+  width:64px;height:64px;border-radius:18px;
+  background:rgba(255,193,7,0.12);
+  border:1px solid rgba(255,193,7,0.3);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.6rem;
+}
+.sg-offline-h1{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(1.6rem,5vw,2.1rem);
+  font-weight:800;letter-spacing:-.02em;
+  margin-bottom:.6rem;
+}
+.sg-offline-sub{
+  font-size:1rem;font-weight:500;
+  color:#FFC107;margin-bottom:.9rem;
+}
+.sg-offline-body{
+  font-size:.9rem;font-weight:300;line-height:1.7;
+  color:rgba(255,255,255,0.6);
+  margin-bottom:1.8rem;
+  max-width:400px;
+}
+.sg-offline-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#FFC107;color:#16213E;
+  font-weight:700;font-family:'DM Sans',sans-serif;
+  padding:.85rem 2rem;border-radius:100px;
+  font-size:.95rem;border:none;cursor:pointer;
+  transition:background .2s,transform .15s;
+}
+.sg-offline-btn:hover{background:#E6AC00;transform:translateY(-2px);}
+.sg-offline-btn:active{transform:translateY(0);}
+.sg-offline-hint{
+  font-size:.78rem;color:rgba(255,255,255,0.35);
+  margin-top:.9rem;margin-bottom:2rem;
+}
+.sg-offline-status{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:14px;
+  padding:1rem 1.2rem;
+  margin-bottom:1.2rem;
+  text-align:left;
+}
+.sg-offline-status-label{
+  font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);
+  margin-bottom:.5rem;
+}
+.sg-offline-status-row{
+  display:flex;align-items:center;gap:.6rem;
+  font-size:.88rem;font-weight:500;color:#fff;
+}
+.sg-offline-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#FF6B6B;flex-shrink:0;
+  animation:sg-offline-pulse 1.4s ease-in-out infinite;
+}
+@keyframes sg-offline-pulse{
+  0%,100%{opacity:1;}
+  50%{opacity:.35;}
+}
+.sg-offline-todo{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:14px;
+  padding:1.1rem 1.3rem;
+  text-align:left;
+}
+.sg-offline-todo-label{
+  font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);
+  margin-bottom:.7rem;
+}
+.sg-offline-todo ul{
+  list-style:none;
+  display:flex;flex-direction:column;gap:.6rem;
+}
+.sg-offline-todo li{
+  font-size:.85rem;color:rgba(255,255,255,0.7);
+  line-height:1.5;
+  display:flex;align-items:flex-start;gap:.55rem;
+}
+.sg-offline-todo li::before{
+  content:'';
+  width:5px;height:5px;border-radius:50%;
+  background:#FFC107;flex-shrink:0;margin-top:7px;
+}
+@media(max-width:480px){
+  #sevago-offline-overlay{padding:8% 6%;}
+  .sg-offline-card{max-width:100%;}
+}
+</style>
+<div id="sevago-offline-overlay" role="alert" aria-live="assertive">
+  <div class="sg-offline-card">
+    <div class="sg-offline-icon-wrap">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 9a16 16 0 0 1 22 0" stroke="#FFC107" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+        <path d="M5 13a10 10 0 0 1 14 0" stroke="#FFC107" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+        <path d="M9 17a4 4 0 0 1 6 0" stroke="#FFC107" stroke-width="2" stroke-linecap="round"/>
+        <line x1="2" y1="2" x2="22" y2="22" stroke="#FFC107" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="sg-offline-h1">You are offline</div>
+    <div class="sg-offline-sub">SevaGo is waiting for your connection.</div>
+    <p class="sg-offline-body">The app automatically returns as soon as your internet connection is back. Until then, this screen prevents partial loads and broken requests.</p>
+    <button class="sg-offline-btn" id="sgOfflineRetryBtn" type="button">Try again</button>
+    <p class="sg-offline-hint">Switch to Wi-Fi or mobile data and SevaGo will resume automatically.</p>
+    <div class="sg-offline-status">
+      <div class="sg-offline-status-label">Connection status</div>
+      <div class="sg-offline-status-row"><span class="sg-offline-dot"></span><span id="sgOfflineStatusText">Waiting for network access</span></div>
+    </div>
+    <div class="sg-offline-todo">
+      <div class="sg-offline-todo-label">What you can do</div>
+      <ul>
+        <li>Check whether mobile data or Wi-Fi is enabled.</li>
+        <li>Move to an area with stronger coverage if signal is weak.</li>
+        <li>Tap Try again after reconnecting if SevaGo does not switch immediately.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var overlay = document.getElementById('sevago-offline-overlay');
+  if(!overlay) return;
+  var retryBtn = document.getElementById('sgOfflineRetryBtn');
+  var statusText = document.getElementById('sgOfflineStatusText');
+
+  function showOverlay(){
+    overlay.classList.add('sg-offline-visible');
+    if(statusText) statusText.textContent = 'Waiting for network access';
+  }
+  function hideOverlay(){
+    overlay.classList.remove('sg-offline-visible');
+  }
+
+  window.addEventListener('offline', showOverlay);
+  window.addEventListener('online', hideOverlay);
+
+  if(retryBtn){
+    retryBtn.addEventListener('click', function(){
+      if(statusText) statusText.textContent = 'Checking connection…';
+      if(navigator.onLine){
+        fetch(window.location.href, {method:'HEAD', cache:'no-store'})
+          .then(function(){ hideOverlay(); })
+          .catch(function(){ if(statusText) statusText.textContent = 'Still waiting for network access'; });
+      } else {
+        setTimeout(function(){
+          if(statusText) statusText.textContent = 'Still waiting for network access';
+        }, 500);
+      }
+    });
+  }
+
+  if(navigator.onLine === false){
+    showOverlay();
+  }
+})();
+</script>
+
+</body>
+</html>
