@@ -1,0 +1,5 @@
+# Netlify (ignored on Vercel). Clean URLs work automatically on Netlify; these add the aliases.
+/privacy            /privacy-policy         301
+/terms              /terms-and-conditions   301
+/terms-of-service   /terms-and-conditions   301
+/tos                /terms-and-conditions   301
