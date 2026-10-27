@@ -485,7 +485,7 @@ nav.scrolled{
   padding-top:2.5rem;
   border-top:1px solid rgba(255,255,255,0.15);
 }
-.hero-bottom-left{display:flex;flex-direction:column;gap:1.5rem;max-width:480px;}
+.hero-bottom-left{display:flex;flex-direction:column;gap:1.5rem;max-width:none;width:100%;}
 .hero-bottom-right{
   display:flex;
   flex-direction:column;
@@ -498,12 +498,134 @@ nav.scrolled{
   color:rgba(255,255,255,0.7);line-height:1.75;
   overflow-wrap:break-word;
   word-break:break-word;
-  max-width:100%;
+  max-width:480px;
   box-sizing:border-box;
 }
 .hero-desc strong{color:var(--white);font-weight:500;}
 .hero-desc .gold{color:var(--gold);font-weight:500;}
-.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;}
+.hero-actions{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1.35rem;
+  width:100%;
+  margin-top:.75rem;
+}
+.hero-store-choices{
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  gap:1.6rem;
+  flex-wrap:wrap;
+  width:100%;
+}
+.hero-store-choice{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.65rem;
+  position:relative;
+  animation:heroStoreRise .75s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-store-choice:nth-child(2){
+  animation-delay:.14s;
+}
+.hero-store-label{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1rem;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.1em;
+  color:var(--white);
+  text-transform:uppercase;
+  text-align:center;
+  text-shadow:0 0 18px rgba(255,255,255,.22);
+}
+.hero-store-label small{
+  display:block;
+  min-height:1em;
+  margin-top:.3rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:0;
+  color:var(--gold);
+  text-transform:none;
+}
+.hero-store-btn{
+  width:260px;
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  padding:.95rem 1.5rem;
+  border:2px solid rgba(255,193,7,.55);
+  border-radius:18px;
+  background:linear-gradient(135deg,#fff 0%,#f7f9ff 100%);
+  color:#111;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 12px 32px rgba(0,0,0,.24),0 0 0 0 rgba(255,193,7,.32);
+  transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s ease,border-color .25s ease;
+  animation:heroStoreGlow 2.8s ease-in-out infinite;
+}
+.hero-store-btn::before{
+  content:'';
+  position:absolute;
+  inset:-45% auto -45% -35%;
+  width:34%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);
+  transform:skewX(-20deg);
+  animation:heroStoreShine 3.6s ease-in-out infinite;
+  pointer-events:none;
+}
+.hero-store-choice:nth-child(2) .hero-store-btn::before{
+  animation-delay:1.1s;
+}
+.hero-store-btn:hover{
+  transform:translateY(-6px) scale(1.035);
+  border-color:var(--gold);
+  box-shadow:0 20px 42px rgba(0,0,0,.32),0 0 28px rgba(255,193,7,.3);
+}
+.hero-store-icon{
+  width:29px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+}
+.hero-store-copy{display:flex;flex-direction:column;line-height:1.05;}
+.hero-store-copy .overline{
+  font-family:'DM Sans',sans-serif;
+  font-size:.66rem;
+  font-weight:500;
+}
+.hero-store-copy .name{
+  margin-top:3px;
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.25rem;
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+.hero-secondary-action{margin-top:.2rem;}
+@keyframes heroStoreRise{
+  from{opacity:0;transform:translateY(24px) scale(.96);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+@keyframes heroStoreGlow{
+  0%,100%{box-shadow:0 12px 32px rgba(0,0,0,.24),0 0 0 0 rgba(255,193,7,.28);}
+  50%{box-shadow:0 16px 38px rgba(0,0,0,.28),0 0 0 8px rgba(255,193,7,0);}
+}
+@keyframes heroStoreShine{
+  0%,58%{left:-42%;opacity:0;}
+  67%{opacity:.8;}
+  82%,100%{left:118%;opacity:0;}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-store-choice,.hero-store-btn,.hero-store-btn::before{animation:none!important;}
+}
 
 /* (mini mascot interactive styles are with the ist-bubble-wrap block) */
 .bottom-ticker-bar{
@@ -1457,8 +1579,9 @@ nav.scrolled{
   /* IST bubble */
   .ist-bubble-wrap{flex-direction:row;align-items:center;margin-top:.5rem;}
 
-  .hero-actions{flex-direction:column;align-items:flex-start;gap:.75rem;}
-  .hero-actions a{width:auto;min-width:220px;max-width:340px;justify-content:center;}
+  .hero-actions{align-items:center;gap:1.2rem;}
+  .hero-actions a{justify-content:center;}
+  .hero-store-btn{width:240px;min-width:240px;max-width:240px;}
   .hero-middle{flex-direction:column;align-items:flex-start;gap:1rem;padding-top:6rem;}
   .hero-answer{text-align:left;}
   .hero-bottom{flex-direction:column;align-items:flex-start;}
@@ -1514,6 +1637,10 @@ nav.scrolled{
   .section-title,.step-heading,.faq-big,.app-heading,.hiring-big,.reviews-big,.investors-big{letter-spacing:-.025em;}
   .hero-h1{font-size:clamp(2.4rem,11vw,4rem);}
   .hero-answer{font-size:clamp(2rem,9vw,3.5rem);}
+  .hero-store-choices{width:100%;gap:1.1rem;flex-direction:column;align-items:center;}
+  .hero-store-choice{width:min(100%,300px);}
+  .hero-store-btn{width:100%;min-width:0;max-width:300px;min-height:72px;padding:.85rem 1.1rem;}
+  .hero-store-copy .name{font-size:1.15rem;}
 
   /* Reviews carousel — fits 1 card clearly on small phones */
   .rcard{flex:0 0 280px;padding:1.4rem;}
@@ -2358,56 +2485,6 @@ body > section, body > div, body > footer, body > nav{
 
 
 
-<!-- ── DOWNLOAD: POSTER + PARTNER APPS (top) ── -->
-<section class="sg-dl" aria-labelledby="sg-dl-title">
-  <style>
-    .sg-dl{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#0a3fb0;color:#fff;padding:120px 24px 64px;position:relative;z-index:1}
-    .sg-dl *{box-sizing:border-box}
-    .sg-dl .sg-wrap{max-width:960px;margin:0 auto}
-    .sg-dl h2{margin:0 0 10px;font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;font-weight:800;letter-spacing:-.02em}
-    .sg-dl h2 span{color:#fcc419}
-    .sg-dl .sg-sub{margin:0 0 36px;max-width:460px;font-size:1.05rem;color:rgba(255,255,255,.85)}
-    .sg-dl .sg-cols{display:flex;flex-wrap:wrap;gap:32px 40px}
-    .sg-dl .sg-col{display:flex;flex-direction:column;align-items:flex-start}
-    .sg-dl .sg-label{margin:0 0 4px;font-size:1.5rem;font-weight:800;letter-spacing:.02em;text-transform:uppercase}
-    .sg-dl .sg-note{margin:0 0 12px;font-size:.9rem;font-weight:700;color:#fcc419}
-    .sg-dl .sg-spacer{height:1.35rem;margin-bottom:4px}
-    .sg-dl .sg-btn{display:inline-flex;align-items:center;gap:12px;min-width:190px;background:#fff;color:#000;text-decoration:none;padding:10px 20px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25);transition:transform .2s,box-shadow .2s}
-    .sg-dl .sg-btn:hover{transform:scale(1.06);box-shadow:0 10px 24px rgba(0,0,0,.35)}
-    .sg-dl .sg-btn:focus-visible{outline:3px solid #fcc419;outline-offset:3px}
-    .sg-dl .sg-btn svg{flex:none}
-    .sg-dl .sg-btn small{display:block;font-size:.72rem;line-height:1.1}
-    .sg-dl .sg-btn strong{display:block;font-size:1.05rem;line-height:1.2}
-    @media(max-width:640px){
-      .sg-dl{padding:100px 20px 48px}
-      .sg-dl .sg-cols{flex-direction:column;gap:28px}
-      .sg-dl .sg-btn{min-width:0;width:100%;max-width:280px}
-    }
-  </style>
-  <div class="sg-wrap">
-    <h2 id="sg-dl-title">Download the <span>SevaGo</span> App</h2>
-    <p class="sg-sub">Post tasks or earn by helping nearby people.</p>
-    <div class="sg-cols">
-      <div class="sg-col">
-        <p class="sg-label">Poster</p>
-        <span class="sg-spacer" aria-hidden="true"></span>
-        <a class="sg-btn" href="https://play.google.com/store/apps/details?id=com.sevago.app&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="Get the SevaGo Poster app on Google Play">
-          <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><path d="M1.5 0.4 L1.5 27.6 L14.8 14 Z" fill="#00A0FF"/><path d="M1.5 0.4 L19.2 10.4 L14.8 14 Z" fill="#00E07A"/><path d="M14.8 14 L19.2 17.6 L1.5 27.6 Z" fill="#FF3A44"/><path d="M19.2 10.4 L23.5 14 L19.2 17.6 L14.8 14 Z" fill="#FFC400"/></svg>
-          <span><small>Get it on</small><strong>Google Play</strong></span>
-        </a>
-      </div>
-      <div class="sg-col">
-        <p class="sg-label">Partner</p>
-        <p class="sg-note">only for android</p>
-        <a class="sg-btn" href="https://play.google.com/store/apps/details?id=in.sevago.partner&amp;pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="Get the SevaGo Partner app on Google Play">
-          <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><path d="M1.5 0.4 L1.5 27.6 L14.8 14 Z" fill="#00A0FF"/><path d="M1.5 0.4 L19.2 10.4 L14.8 14 Z" fill="#00E07A"/><path d="M14.8 14 L19.2 17.6 L1.5 27.6 Z" fill="#FF3A44"/><path d="M19.2 10.4 L23.5 14 L19.2 17.6 L14.8 14 Z" fill="#FFC400"/></svg>
-          <span><small>Get it on</small><strong>Google Play</strong></span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
 
@@ -2473,8 +2550,37 @@ body > section, body > div, body > footer, body > nav{
         <button class="hero-chip" onclick="showChip('anything')" data-i18n-chip="chip_anything"><span class="chip-icon">✨</span> <span data-i18n="chip_anything">Anything!</span></button>
       </div>
       <div class="hero-actions">
-        <a href="https://play.google.com/store/apps/details?id=com.app.initio.sevago&hl=en_IN" target="_blank" rel="noopener" class="btn-gold">Download App →</a>
-        <a href="#how" class="btn-outline-white">See how it works</a>
+        <div class="hero-store-choices" aria-label="Download SevaGo apps">
+          <div class="hero-store-choice">
+            <div class="hero-store-label">Poster<small aria-hidden="true">&nbsp;</small></div>
+            <a class="hero-store-btn" href="https://play.google.com/store/apps/details?id=com.sevago.app&amp;pcampaignid=web_share" target="_blank" rel="noopener" aria-label="Get the SevaGo Poster app on Google Play">
+              <span class="hero-store-icon" aria-hidden="true">
+                <svg width="27" height="30" viewBox="0 0 26 28" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.5 0.4 L1.5 27.6 L14.8 14 Z" fill="#4FC3F7"/>
+                  <path d="M1.5 0.4 L19.2 10.4 L14.8 14 Z" fill="#81C784"/>
+                  <path d="M14.8 14 L19.2 17.6 L1.5 27.6 Z" fill="#F48FB1"/>
+                  <path d="M19.2 10.4 L23.5 14 L19.2 17.6 L14.8 14 Z" fill="#FFD54F"/>
+                </svg>
+              </span>
+              <span class="hero-store-copy"><span class="overline">Get it on</span><span class="name">Google Play</span></span>
+            </a>
+          </div>
+          <div class="hero-store-choice">
+            <div class="hero-store-label">Partner<small>only for Android</small></div>
+            <a class="hero-store-btn" href="https://play.google.com/store/apps/details?id=in.sevago.partner&amp;pcampaignid=web_share" target="_blank" rel="noopener" aria-label="Get the SevaGo Partner app on Google Play">
+              <span class="hero-store-icon" aria-hidden="true">
+                <svg width="27" height="30" viewBox="0 0 26 28" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.5 0.4 L1.5 27.6 L14.8 14 Z" fill="#4FC3F7"/>
+                  <path d="M1.5 0.4 L19.2 10.4 L14.8 14 Z" fill="#81C784"/>
+                  <path d="M14.8 14 L19.2 17.6 L1.5 27.6 Z" fill="#F48FB1"/>
+                  <path d="M19.2 10.4 L23.5 14 L19.2 17.6 L14.8 14 Z" fill="#FFD54F"/>
+                </svg>
+              </span>
+              <span class="hero-store-copy"><span class="overline">Get it on</span><span class="name">Google Play</span></span>
+            </a>
+          </div>
+        </div>
+        <a href="#how" class="btn-outline-white hero-secondary-action">See how it works</a>
       </div>
     </div>
   </div>
@@ -3445,8 +3551,8 @@ body > section, body > div, body > footer, body > nav{
     <p class="footer-tagline">Tasks Done In Minutes.</p>
   </div>
   <div class="footer-links">
-    <a href="/privacy-policy">Privacy Policy</a>
-    <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+    <a href="#" onclick="openLegal('privacy');return false;">Privacy Policy</a>
+    <a href="#" onclick="openLegal('tos');return false;">Terms of Service</a>
     <a href="#hiring">We're Hiring</a>
     <a href="mailto:hello@sevago.co.in">hello@sevago.co.in</a>
     <!-- Instagram -->
@@ -5462,7 +5568,7 @@ function copyEmail() {
   <div class="cookie-text">
     <strong>🍪 We use cookies</strong>
     This website uses cookies to ensure you get the best experience. By continuing, you agree to our
-    <a href="/privacy-policy">Privacy Policy</a>.
+    <a href="#" onclick="openLegal('privacy');return false;">Privacy Policy</a>.
   </div>
   <div class="cookie-btns">
     <button class="cookie-btn-decline" onclick="cookieChoice(false)">Decline</button>
