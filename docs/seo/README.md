@@ -86,19 +86,19 @@ Write only from first-hand SevaGo experience; each should link to the matching l
 
 ## 6. Conversion tracking (what exists now)
 
-First-party events stored in `waitlist_events` (unique sessions; no personal data) and pushed to `dataLayer`/`gtag` if you add them: `download_view`, `play_store_click` (Poster), `partner_play_click`, `sticky_cta_click`, `app_store_click`, `waitlist_open/start/submit/success/duplicate/error`, `waitlist_cta_click` (from landing pages). Landing-page clicks carry `source = seo:/path`. `/admin/waitlist` shows the funnel; CSV export for sign-ups.
+First-party events written to the Vercel runtime logs as `sevago_event` JSON lines (no personal data) and pushed to `dataLayer`/`gtag` if you add them: `download_view`, `play_store_click` (Poster), `partner_play_click`, `sticky_cta_click`, `app_store_click`, `waitlist_open/start/submit/success/duplicate/error`, `waitlist_cta_click` (from landing pages). Landing-page clicks carry `source = seo:/path`. Sign-ups are viewed and exported from the waitlist Google Sheet.
 
 | Requested metric | Where it comes from |
 |---|---|
 | Organic impressions, clicks, rankings | Search Console (after verification) |
 | Android download clicks | `play_store_click` / `partner_play_click` (clicks, not installs) |
-| iOS waitlist registrations | `waitlist_success` + `ios_waitlist` table |
+| iOS waitlist registrations | `waitlist_success` events + rows in the waitlist Sheet |
 | **Installs, partner registrations, completed tasks** | **Live inside the apps/back-end, not the website.** Connect with Play Console install reports and your task database, or add `pcampaignid`/UTM-tagged Play links and Firebase attribution. I could not wire this without access. |
 
 ## 7. 90-day organic growth roadmap
 
 **Days 0-14: foundation (needs you)**
-1. Merge, deploy, run `db/schema.sql`, set env vars (see `docs/WAITLIST.md`).
+1. Merge, set the Google Sheets waitlist variables and deploy (see `docs/WAITLIST.md`).
 2. Verify Search Console and Bing; submit `sitemap.xml`; request indexing for `/coimbatore` and its 9 pages.
 3. Export Keyword Planner volumes for the 563 fit keywords into the CSV; re-sort P1/P2 by real volume.
 4. Verify the neighbourhood-page facts; remove any area you cannot serve.
@@ -113,7 +113,7 @@ First-party events stored in `waitlist_events` (unique sessions; no personal dat
 **Days 46-90: expand and measure**
 10. Add Bengaluru pages once you can supply real local content for 3-4 areas; Chennai only after launch.
 11. Earn links: college student-affairs pages, local start-up groups, press.
-12. Weekly: Search Console queries, impressions/clicks per page, funnel conversion in `/admin/waitlist`; improve titles of pages with impressions but low CTR.
+12. Weekly: Search Console queries, impressions/clicks per page, sign-ups in the waitlist Sheet and `sevago_event` logs; improve titles of pages with impressions but low CTR.
 13. Day 90 review: which pages rank in positions 1-10? Double down on those intents; merge or remove pages that get no impressions.
 
 **Success metrics (set targets after day 14 with real volumes):** indexed pages = 10/10; impressions and clicks per page (Search Console); position for "queue standing service Coimbatore", "errand services Coimbatore", "odd jobs near me Coimbatore"; Play and waitlist clicks per 100 organic sessions; LCP < 2.5 s, CLS < 0.1, INP < 200 ms in CrUX at p75.

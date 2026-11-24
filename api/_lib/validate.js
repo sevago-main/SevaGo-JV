@@ -2,7 +2,7 @@
 
 const NAME_RE = /^[\p{L}\p{M}][\p{L}\p{M}\s.'’-]{1,79}$/u;
 const CITY_RE = /^[\p{L}\p{M}][\p{L}\p{M}\s.,'’()-]{1,59}$/u;
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const EMAIL_RE = /^[A-Za-z0-9][^\s@]*@[^\s@]+\.[^\s@]{2,}$/; // must not start with = + - @ (spreadsheet formulas)
 
 function clean(value) {
   return typeof value === 'string' ? value.replace(/\s+/g, ' ').trim() : '';

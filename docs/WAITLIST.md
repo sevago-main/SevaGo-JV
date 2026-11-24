@@ -1,85 +1,83 @@
-# iOS waitlist + download section
+# iOS waitlist (Google Sheets)
 
-## What was added
+Sign-ups go from the website form to a **private Google Sheet**. There is no database: nothing here touches AWS, the SevaGo app backend or any app data.
 
-| Piece | File |
-|---|---|
-| Download panel (Play + iOS waitlist) in the "Get the app" section | `index.html`, `css/download.css`, `js/download.js` |
-| Waitlist API (validation, dedupe, spam checks) | `api/waitlist.js` |
-| Funnel tracking API | `api/track.js` |
-| Admin CSV export + funnel summary API | `api/admin/waitlist-export.js` |
-| Admin page (token prompt, CSV download, funnel) | `admin/waitlist.html` -> `/admin/waitlist` |
-| PostgreSQL schema | `db/schema.sql` |
-| iOS button switch | `site-config.json` |
-| Tests | `tests/` (`npm test`) |
-
-## One-time setup
-
-1. **Create the tables** on the AWS PostgreSQL database:
-   `psql "$DATABASE_URL" -f db/schema.sql`
-   Use a dedicated DB user that only has `SELECT, INSERT, DELETE` on these three tables.
-2. **Set environment variables** in Vercel (Project -> Settings -> Environment Variables, Production + Preview). See `.env.example`.
-   - `DATABASE_URL`, `DATABASE_CA` (RDS CA bundle PEM, so TLS is verified)
-   - `IP_HASH_SALT`, `ADMIN_EXPORT_TOKEN` (generate with `openssl rand -hex 32`)
-   - `ALLOWED_ORIGINS` (defaults to sevago.co.in and www.sevago.co.in)
-3. **Network access.** Vercel functions do not have a fixed IP. Either allow the RDS instance to be reached publicly with TLS + a strong password, or put it behind RDS Proxy / a public endpoint restricted another way. Ask whoever owns the AWS account which they prefer.
-4. Deploy. `npm install` runs automatically because of `package.json`.
-
-## Switching iOS to the App Store after approval
-
-Edit `site-config.json` and push:
-
-```json
-{ "ios": { "mode": "appstore", "appStoreUrl": "https://apps.apple.com/in/app/sevago/idXXXXXXXXXX" } }
+```
+Browser form --> /api/waitlist (Vercel, validates + spam checks) --> Google Apps Script (secret, lock, dedupe) --> private Sheet
 ```
 
-The iOS card turns into a gold "Download on the App Store" button and the form is hidden. Only `https://apps.apple.com/...` or `https://itunes.apple.com/...` links are accepted; anything else keeps the waitlist. Set `"mode": "waitlist"` to go back.
+The Sheet is never shared and has no public link. The Apps Script web app runs *as you* and only accepts calls that carry a long shared secret, so the web-app URL alone reveals nothing and writes nothing.
 
-## How spam and duplicates are handled
+## Setup (about 10 minutes, once)
 
-- Unique index on the normalised contact (lower-cased email, or `+91XXXXXXXXXX`), so `98765 43210`, `+91 98765-43210` and `09876543210` are one person.
-- Hidden honeypot field, minimum fill time (1.5 s), Origin check, JSON-only, 4 KB body limit.
-- Max 6 attempts per visitor per 10 minutes (visitor = HMAC of the IP; raw IPs are never stored).
-- Consent is required, stored with a timestamp and the consent text version (`ios-waitlist-v1`).
+1. **Create the Sheet.** In Google Sheets create a blank spreadsheet named e.g. "SevaGo iOS waitlist". Leave sharing as *Restricted* (only you).
+2. **Add the script.** In the Sheet: Extensions -> Apps Script. Replace the contents of `Code.gs` with `google-apps-script/Code.gs` from this repo. Save.
+3. **Set the secret.** Apps Script -> Project Settings (gear) -> Script properties -> Add: name `WAITLIST_SECRET`, value a random string of 32+ characters (e.g. run `openssl rand -hex 32`). Keep a copy for step 5.
+4. **Deploy.** Deploy -> New deployment -> type *Web app*. Description: `waitlist`. **Execute as: Me.** **Who has access: Anyone** (the Vercel server has no Google login, so it must be "Anyone"; the secret is what protects it, and the Sheet itself stays private). Deploy, approve the permission prompt once, and copy the **Web app URL** (`https://script.google.com/macros/s/.../exec`).
+5. **Set Vercel variables** (Project -> Settings -> Environment Variables, Production):
+   - `WAITLIST_WEBHOOK_URL` = the Web app URL
+   - `WAITLIST_WEBHOOK_SECRET` = the same secret as step 3
+   - optional: `IP_HASH_SALT` (random 32+ chars; otherwise one is derived from the secret)
+   - optional: `ALLOWED_ORIGINS` (defaults to `https://sevago.co.in,https://www.sevago.co.in`)
+   You can delete the old `DATABASE_*`, `ADMIN_EXPORT_TOKEN`, `IP_HASH_SALT` (if unused) and `WAITLIST_AUTO_MIGRATE` variables.
+6. **Redeploy** (variables only apply to new deployments).
+7. **Check:** `curl https://sevago.co.in/api/health` should return `{"ok":true,"checks":{"webhook_url_set":true,"webhook_secret_set":true,"script":"ok"}}`.
+8. **Test:** submit the form with a test name/email, open the Sheet and confirm a new row in the `Waitlist` tab (created automatically). Submit the same email again: the form says "You're already on the waitlist." and the row's *Duplicate attempts* becomes 1. Delete the test row.
+
+**If you change `Code.gs` later:** Deploy -> Manage deployments -> Edit (pencil) -> Version: New version -> Deploy. The URL stays the same.
+
+## What is saved (tab `Waitlist`)
+
+| Column | Notes |
+|---|---|
+| Registered at (IST) / (UTC) | server time of the first registration |
+| Name, Phone or email, Type, City | contact is normalised (`+919876543210`, lower-case email) and is the duplicate key |
+| Notification consent | always `Yes` (a sign-up without consent is rejected) |
+| Consent text version | `ios-waitlist-v1`, so you can prove which wording was agreed |
+| Status | `Registered`, or `Registered, duplicate attempted` |
+| Duplicate attempts / Last duplicate attempt (IST) | updated on the original row; no extra rows or extra personal data |
+| Source | `utm_source` or referrer host |
+
+Everything is written as plain text, so a name or email can never be run as a spreadsheet formula. IP addresses are **not** stored. A salted hash is used only for rate limiting and is not written to the Sheet.
+
+**Viewing and exporting:** open the Sheet. File -> Download -> CSV (or Excel). To control who can see it, use the Sheet's normal Share settings (keep it to a few named people).
+
+## Protection against spam and duplicates
+
+- Server (`api/waitlist.js`): allowed-origin check, JSON only, 4 KB body limit, hidden honeypot field, minimum fill time (1.5 s), strict validation of name, city, email/phone and consent, per-visitor limit.
+- Apps Script: re-validates everything, shared rate limit per visitor (6 per 10 min) and a global cap of 300 sign-ups per hour, all inside a script lock, so two simultaneous identical sign-ups can only ever create one row.
+- The secret is only sent to `script.google.com` / `googleusercontent.com`; any other URL is refused. The secret and URL are never logged or returned to browsers.
+
+## Visitor messages
+
+| Situation | Message |
+|---|---|
+| Saved | "You're on the list. We'll notify you when SevaGo launches on iOS." |
+| Already registered | "You're already on the waitlist." |
+| Bad field | inline message under that field |
+| Too many attempts | "Too many attempts from this device. Please wait a few minutes and try again." |
+| Our setup problem (503) | "Sign-ups are temporarily unavailable on our side. Your details were not saved..." |
+| No connection | "We couldn't reach SevaGo. Check your internet connection and try again." |
+
+## Troubleshooting with `/api/health`
+
+| `script` value | Meaning | Fix |
+|---|---|---|
+| `ok` | everything wired | none |
+| `not_checked` | URL or secret missing in Vercel | step 5, then redeploy |
+| `sheet_misconfigured` | Google returned a web page, not JSON: wrong URL or "Who has access" is not *Anyone*, or the deployment is stale | redo step 4; copy the URL again |
+| `sheet_unauthorized` | secret in Vercel differs from the script property | make `WAITLIST_SECRET` and `WAITLIST_WEBHOOK_SECRET` identical |
+| `sheet_not_configured` | `WAITLIST_SECRET` not set in the script | step 3 |
+| `sheet_unreachable` | timeout or network | retry; check Google status |
+| `sheet_busy` / `sheet_error` | script under heavy load / crashed | check Apps Script -> Executions |
+| `server_misconfigured` | URL is not a Google Apps Script URL, or secret shorter than 16 chars | steps 3-5 |
 
 ## Conversion tracking
 
-Events (unique sessions): `download_view`, `play_store_click`, `app_store_click`, `waitlist_open`, `waitlist_start`, `waitlist_submit`, `waitlist_success`, `waitlist_duplicate`, `waitlist_error`.
-They are stored in `waitlist_events`, and also pushed to `window.dataLayer` / `gtag` if you add Google Tag Manager or GA later.
-Open `/admin/waitlist` -> "Show funnel" for views -> joined and the conversion rate.
-
-## Admin CSV export
-
-`/admin/waitlist` asks for `ADMIN_EXPORT_TOKEN`, then downloads `sevago-ios-waitlist-YYYY-MM-DD.csv`.
-Direct call: `curl -H "Authorization: Bearer $ADMIN_EXPORT_TOKEN" https://sevago.co.in/api/admin/waitlist-export -o waitlist.csv`.
-Cells starting with `= + - @` are prefixed with `'` so spreadsheets do not run them as formulas.
-This repo has no existing admin dashboard, so this is a standalone page. If you have a separate dashboard, link to it or call the same endpoint from there.
+`/api/track` no longer uses any database. Each event is one JSON line in the Vercel runtime logs (`sevago_event`, with event, platform, anonymous session and page source; no personal data). View it in Vercel -> Logs (search `sevago_event`), or attach a log drain for longer retention. The `waitlist_success` / `waitlist_duplicate` events plus the Sheet's row count give you views -> sign-ups. Events are also pushed to `dataLayer`/`gtag` if you add Google Tag Manager or Analytics.
 
 ## Before going live
 
-- **Update the Privacy Policy.** `privacy.html` currently says the website only collects what visitors send through the hiring form and chat assistant. The waitlist now collects name, phone/email, city and consent. The policy text must be updated by whoever owns the legal wording.
-- Run a test sign-up on a Vercel preview deployment and download the CSV.
-
-
-## Troubleshooting a failing form (production)
-
-1. `curl https://sevago.co.in/api/health` returns only `{"ok":false}` when something is missing.
-   With the admin token it says exactly what: `curl -H "Authorization: Bearer $ADMIN_EXPORT_TOKEN" https://sevago.co.in/api/health`
-   (booleans and error codes only, never values).
-2. The form now shows a specific reason instead of a generic failure. The API returns these `error` codes:
-
-| Code | HTTP | Meaning | Fix |
-|---|---|---|---|
-| `server_misconfigured` | 503 | `DATABASE_URL` (and `IP_HASH_SALT`) missing in Vercel | Add the variables in Vercel -> Settings -> Environment Variables (Production) and **redeploy**. Variables only apply to new deployments. |
-| `db_unreachable` | 503 | RDS refused or timed out | RDS security group / public access, endpoint, region |
-| `db_auth_failed`, `db_not_found`, `db_permission_denied` | 503 | wrong user/password/database, or the role lacks rights | Fix the user; it needs SELECT, INSERT, DELETE on the 3 tables |
-| `db_tls_failed` | 503 | TLS verification failed | Set `DATABASE_CA` to the RDS CA bundle PEM |
-| `schema_missing` | 503 | tables not created | `DATABASE_URL=... npm run migrate`, or set `WAITLIST_AUTO_MIGRATE=true` once (needs CREATE rights), then unset it |
-| `rate_limited` | 429 | 6 attempts in 10 min from one visitor | wait |
-| `forbidden` | 403 | request not from an allowed origin | `ALLOWED_ORIGINS` (defaults to sevago.co.in and www) |
-| `server_error` | 500 | unexpected | check Vercel function logs (codes only, no personal data) |
-
-`IP_HASH_SALT` is now optional: if unset, a salt is derived from `DATABASE_URL`. `ADMIN_EXPORT_TOKEN` is still required for `/admin/waitlist` (view, funnel, CSV).
-
-## Data protection
-Stored: name, normalised email/phone, city, consent + timestamp + consent text version, hashed IP, user agent, UTM source. Raw IPs are never stored. Data is encrypted in transit (TLS, verified with `DATABASE_CA`). Encryption at rest, backups and access control are RDS settings: enable storage encryption on the instance, restrict the DB user to these three tables, and limit who holds `ADMIN_EXPORT_TOKEN`. The privacy policy must mention the waitlist.
+- The privacy policy must mention the waitlist (name, phone or email, city, consent, stored in Google Sheets / Google Workspace, deletion on request). The CA-reviewed text does not yet.
+- Decide who may open the Sheet, and delete rows when someone asks.
+- Google Apps Script has quotas (consumer accounts: about 20,000 web-app calls/day, plus 6 minutes per execution); a Google Workspace account has higher limits. Plenty for a waitlist.
