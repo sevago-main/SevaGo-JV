@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>iOS Waitlist Admin | SevaGo</title>
+<style>
+:root{--navy2:#0F1729;--navy:#16213E;--gold:#FFC107;--blue:#0539A2;--text:rgba(255,255,255,.85)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif;background:var(--navy2);color:#fff;min-height:100vh;padding:2rem 1rem}
+main{max-width:640px;margin:0 auto}
+h1{font-size:1.6rem;margin:0 0 .3rem}
+p.sub{color:var(--text);margin:0 0 1.5rem}
+.card{background:var(--navy);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:1.2rem;margin-bottom:1rem}
+label{display:block;font-weight:600;font-size:.85rem;margin-bottom:.4rem}
+input{width:100%;min-height:46px;padding:.6rem .8rem;font:inherit;font-size:16px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff}
+.row{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.9rem}
+button{min-height:46px;padding:0 1.2rem;border:0;border-radius:12px;font:inherit;font-weight:700;cursor:pointer;background:var(--gold);color:var(--navy)}
+button.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#msg{min-height:1.4rem;color:#ffb4ab;font-size:.9rem}
+dl{display:grid;grid-template-columns:1fr auto;gap:.4rem 1rem;margin:0}
+dt{color:var(--text)}dd{margin:0;font-weight:700;text-align:right}
+</style>
+</head>
+<body>
+<main>
+  <h1>iOS waitlist</h1>
+  <p class="sub">Export sign-ups and check the download-to-waitlist funnel. Access needs the admin export token.</p>
+
+  <section class="card" aria-labelledby="auth-h">
+    <label id="auth-h" for="token">Admin export token</label>
+    <input id="token" type="password" autocomplete="off" spellcheck="false">
+    <div class="row">
+      <button id="csv" type="button">Download CSV</button>
+      <button id="sum" type="button" class="secondary">Show funnel (30 days)</button>
+    </div>
+    <p id="msg" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="card" id="summary" hidden aria-labelledby="sum-h">
+    <h2 id="sum-h" style="margin:0 0 .8rem;font-size:1.1rem">Funnel (unique sessions)</h2>
+    <dl id="sumList"></dl>
+  </section>
+</main>
+<script>
+(function () {
+  var msg = document.getElementById('msg');
+  function token() { return document.getElementById('token').value.trim(); }
+  function call(qs) {
+    if (!token()) { msg.textContent = 'Enter the token first.'; return Promise.reject(); }
+    msg.textContent = 'Working…';
+    return fetch('/api/admin/waitlist-export' + qs, { headers: { Authorization: 'Bearer ' + token() }, cache: 'no-store' })
+      .then(function (r) {
+        if (r.status === 401) throw new Error('Wrong token.');
+        if (r.status === 429) throw new Error('Too many wrong attempts. Try again in 15 minutes.');
+        if (r.status === 503) throw new Error('Admin export is not configured on the server.');
+        if (!r.ok) throw new Error('Server error (' + r.status + ').');
+        return r;
+      });
+  }
+  document.getElementById('csv').addEventListener('click', function () {
+    call('').then(function (r) { return r.blob(); }).then(function (b) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(b);
+      a.download = 'sevago-ios-waitlist-' + new Date().toISOString().slice(0, 10) + '.csv';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+      msg.textContent = 'Downloaded.';
+    }).catch(function (e) { if (e && e.message) msg.textContent = e.message; });
+  });
+  document.getElementById('sum').addEventListener('click', function () {
+    call('?view=summary&days=30').then(function (r) { return r.json(); }).then(function (j) {
+      var s = j.sessions || {};
+      var rows = [
+        ['Total sign-ups', j.totalSignups], ['Panel views', s.download_view || 0],
+        ['Google Play clicks', s.play_store_click || 0], ['App Store clicks', s.app_store_click || 0],
+        ['Waitlist opened', s.waitlist_open || 0], ['Started typing', s.waitlist_start || 0],
+        ['Submitted', s.waitlist_submit || 0], ['Joined', s.waitlist_success || 0],
+        ['Conversion (joined / views)', j.conversionRate === null ? 'n/a' : j.conversionRate + '%'],
+      ];
+      var dl = document.getElementById('sumList'); dl.textContent = '';
+      rows.forEach(function (r) {
+        var dt = document.createElement('dt'); dt.textContent = r[0];
+        var dd = document.createElement('dd'); dd.textContent = r[1];
+        dl.appendChild(dt); dl.appendChild(dd);
+      });
+      document.getElementById('summary').hidden = false;
+      msg.textContent = '';
+    }).catch(function (e) { if (e && e.message) msg.textContent = e.message; });
+  });
+})();
+</script>
+</body>
+</html>
