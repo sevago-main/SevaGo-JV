@@ -169,7 +169,11 @@ if (require.main === module) {
   for (const [rel, content] of Object.entries(out)) {
     const f = path.join(ROOT, rel);
     const cur = fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : null;
-    if (check) { if (cur !== content) { console.error('out of date:', rel); bad++; } continue; }
+    if (check) { if (cur === null || cur.replace(/
+/g, '
+') !== content.replace(/
+/g, '
+')) { console.error('out of date:', rel); bad++; } continue; }
     fs.mkdirSync(path.dirname(f), { recursive: true });
     fs.writeFileSync(f, content);
   }
