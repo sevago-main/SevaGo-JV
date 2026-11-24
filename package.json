@@ -2,20 +2,13 @@
   "name": "sevago-website",
   "private": true,
   "version": "1.0.0",
-  "description": "SevaGo marketing site with iOS waitlist API (Vercel serverless + PostgreSQL)",
+  "description": "SevaGo marketing site with iOS waitlist (Vercel functions + private Google Sheet)",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "test": "node --test tests/validate.test.js tests/waitlist.test.js tests/admin-track.test.js tests/frontend.test.js tests/seo.test.js tests/errors-health.test.js",
+    "test": "node --test tests/validate.test.js tests/waitlist.test.js tests/appscript.test.js tests/track-health.test.js tests/frontend.test.js tests/seo.test.js",
     "build:seo": "node scripts/build-seo.js",
-    "harvest:keywords": "node scripts/keyword-harvest.js",
-    "migrate": "node scripts/migrate.js"
-  },
-  "dependencies": {
-    "pg": "^8.11.5"
-  },
-  "devDependencies": {
-    "pg-mem": "^3.0.5"
+    "harvest:keywords": "node scripts/keyword-harvest.js"
   }
 }
