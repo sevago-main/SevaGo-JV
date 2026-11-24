@@ -2,6 +2,7 @@
 const { getClientIp, hashIp, originAllowed, send, readBody } = require('./_lib/security');
 const { shortText } = require('./_lib/validate');
 const { getDb } = require('./_lib/db');
+const { resolveSalt, classifyDbError, statusFor } = require('./_lib/errors');
 
 const EVENTS = new Set([
   'download_view', 'play_store_click', 'partner_play_click', 'sticky_cta_click', 'app_store_click', 'waitlist_cta_click',
@@ -23,8 +24,9 @@ function makeHandler(deps = {}) {
         typeof body.sessionId !== 'string' || !/^[a-z0-9-]{8,64}$/i.test(body.sessionId)) {
       return send(res, 400, { ok: false });
     }
-    if (!env.IP_HASH_SALT || env.IP_HASH_SALT.length < 16) return send(res, 500, { ok: false });
-    const ipHash = hashIp(getClientIp(req), env.IP_HASH_SALT);
+    const salt = resolveSalt(env);
+    if (!salt) return send(res, 503, { ok: false, error: 'server_misconfigured' });
+    const ipHash = hashIp(getClientIp(req), salt);
     const db = getDatabase();
     try {
       const recent = await db.query(
@@ -36,8 +38,9 @@ function makeHandler(deps = {}) {
         [body.event, body.platform, body.sessionId, shortText(body.source, 60), ipHash]);
       return send(res, 204);
     } catch (err) {
-      console.error('track failed', err && (err.code || err.message));
-      return send(res, 500, { ok: false });
+      const kind = classifyDbError(err);
+      console.error('track failed:', kind);
+      return send(res, statusFor(kind), { ok: false, error: kind });
     }
   };
 }

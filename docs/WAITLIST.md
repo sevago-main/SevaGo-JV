@@ -59,3 +59,27 @@ This repo has no existing admin dashboard, so this is a standalone page. If you 
 
 - **Update the Privacy Policy.** `privacy.html` currently says the website only collects what visitors send through the hiring form and chat assistant. The waitlist now collects name, phone/email, city and consent. The policy text must be updated by whoever owns the legal wording.
 - Run a test sign-up on a Vercel preview deployment and download the CSV.
+
+
+## Troubleshooting a failing form (production)
+
+1. `curl https://sevago.co.in/api/health` returns only `{"ok":false}` when something is missing.
+   With the admin token it says exactly what: `curl -H "Authorization: Bearer $ADMIN_EXPORT_TOKEN" https://sevago.co.in/api/health`
+   (booleans and error codes only, never values).
+2. The form now shows a specific reason instead of a generic failure. The API returns these `error` codes:
+
+| Code | HTTP | Meaning | Fix |
+|---|---|---|---|
+| `server_misconfigured` | 503 | `DATABASE_URL` (and `IP_HASH_SALT`) missing in Vercel | Add the variables in Vercel -> Settings -> Environment Variables (Production) and **redeploy**. Variables only apply to new deployments. |
+| `db_unreachable` | 503 | RDS refused or timed out | RDS security group / public access, endpoint, region |
+| `db_auth_failed`, `db_not_found`, `db_permission_denied` | 503 | wrong user/password/database, or the role lacks rights | Fix the user; it needs SELECT, INSERT, DELETE on the 3 tables |
+| `db_tls_failed` | 503 | TLS verification failed | Set `DATABASE_CA` to the RDS CA bundle PEM |
+| `schema_missing` | 503 | tables not created | `DATABASE_URL=... npm run migrate`, or set `WAITLIST_AUTO_MIGRATE=true` once (needs CREATE rights), then unset it |
+| `rate_limited` | 429 | 6 attempts in 10 min from one visitor | wait |
+| `forbidden` | 403 | request not from an allowed origin | `ALLOWED_ORIGINS` (defaults to sevago.co.in and www) |
+| `server_error` | 500 | unexpected | check Vercel function logs (codes only, no personal data) |
+
+`IP_HASH_SALT` is now optional: if unset, a salt is derived from `DATABASE_URL`. `ADMIN_EXPORT_TOKEN` is still required for `/admin/waitlist` (view, funnel, CSV).
+
+## Data protection
+Stored: name, normalised email/phone, city, consent + timestamp + consent text version, hashed IP, user agent, UTM source. Raw IPs are never stored. Data is encrypted in transit (TLS, verified with `DATABASE_CA`). Encryption at rest, backups and access control are RDS settings: enable storage encryption on the instance, restrict the DB user to these three tables, and limit who holds `ADMIN_EXPORT_TOKEN`. The privacy policy must mention the waitlist.

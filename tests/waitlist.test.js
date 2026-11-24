@@ -94,17 +94,26 @@ test('rate limit: the 7th attempt from one visitor in 10 minutes gets 429', asyn
   assert.equal(other.statusCode, 201);
 });
 
-test('database failure returns a generic 500 and does not leak details', async () => {
+test('database unreachable -> 503 with a stable code and no internal details', async () => {
   const handler = makeHandler({ env: ENV, getDb: () => ({ query: async () => { throw Object.assign(new Error('secret host db.internal'), { code: 'ECONNREFUSED' }); } }) });
   const res = makeRes(); await handler(makeReq({ body: goodBody() }), res);
-  assert.equal(res.statusCode, 500);
+  assert.equal(res.statusCode, 503);
+  assert.equal(res.json().error, 'db_unreachable');
   assert.ok(!res.body.includes('secret'));
 });
 
-test('missing IP_HASH_SALT fails closed', async () => {
-  const handler = makeHandler({ env: Object.assign({}, ENV, { IP_HASH_SALT: '' }), getDb: () => { throw new Error('should not be reached'); } });
+test('unexpected errors -> generic 500', async () => {
+  const handler = makeHandler({ env: ENV, getDb: () => ({ query: async () => { throw new Error('boom'); } }) });
   const res = makeRes(); await handler(makeReq({ body: goodBody() }), res);
   assert.equal(res.statusCode, 500);
+  assert.equal(res.json().error, 'server_error');
+});
+
+test('no salt and no DATABASE_URL -> 503 server_misconfigured, database never touched', async () => {
+  const handler = makeHandler({ env: Object.assign({}, ENV, { IP_HASH_SALT: '' }), getDb: () => { throw new Error('should not be reached'); } });
+  const res = makeRes(); await handler(makeReq({ body: goodBody() }), res);
+  assert.equal(res.statusCode, 503);
+  assert.equal(res.json().error, 'server_misconfigured');
 });
 
 test('concurrent identical sign-ups can never produce two rows (unique index)', async () => {
