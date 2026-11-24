@@ -49,17 +49,6 @@
     document.addEventListener('visibilitychange', schedule);
   }
 
-  /* ── Service-card cursor spotlight (hover devices only) ── */
-  if (window.matchMedia && window.matchMedia('(hover:hover)').matches && !reduce) {
-    $$('.svc-card').forEach(function (c) {
-      c.addEventListener('pointermove', function (e) {
-        var r = c.getBoundingClientRect();
-        c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        c.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      }, { passive: true });
-    });
-  }
-
   /* ── iOS: poster CTAs lead to the waitlist ─────────── */
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a');

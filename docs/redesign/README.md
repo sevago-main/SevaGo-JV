@@ -9,7 +9,8 @@
 | Hero (iPhone UA) | n/a | ![](after-iphone-hero.png) |
 | Download panel on a 375 px phone | n/a | ![](after-mobile-download.jpg) |
 | Task journey (new) | n/a | ![](after-desktop-journey.jpg) |
-| Service cards (new) | n/a | ![](after-desktop-services.jpg) |
+| Service cards (compact, 3 × 2) | n/a | ![](after-services-desktop.png) |
+| Service cards (phone width) | n/a | ![](after-services-mobile.png) |
 | Download panel | Play button only, iOS "Soon" placeholder | ![](after-desktop-download.jpg) |
 
 The hero screenshots are headless-browser captures taken part-way through the entrance animation, so some hero text is still fading in. The three `.jpg` files are captures from the preview browser at 1366 px wide. The headless capture tool could not reliably capture below-the-fold sections, so those are preview-pane captures. I did not produce before-shots of the lower sections.
@@ -47,7 +48,7 @@ Live Play listings, opened in a real browser 24 Nov 2026:
 - **Removed:** Investors section, nav/mobile/footer links, investor CSS, i18n keys, scroll-colour and keyboard-nav entries, and the FAQ wording about investor enquiries. `grep -i investor index.html` returns nothing (tested).
 - **Hero:** random drifting dots replaced by a route graphic: a pin, a moving helper and a completed-task check (SVG, ~1.5 KB).
 - **New "task journey" section:** three clickable steps (post → partner accepts → done and paid) beside a phone mockup built in HTML/CSS, with a looping step highlight that pauses once the visitor chooses a step or has reduced-motion on. Phone screens use details from the app's own screens (₹199 minimum budget, offers, completion photo, "I confirm completion").
-- **New services section:** six interactive cards (cursor spotlight, lift, staggered entrance) that link to the Coimbatore landing pages. Categories come from the Play listing.
+- **New services section:** six compact solid cards in a 3 × 2 grid (190 px, 20 px padding, 12 px radius, original illustrations, small pill "Details" button, subtle illustration movement on hover) that link to the Coimbatore landing pages. Categories come from the Play listing.
 - **Download panel:** Poster group (Google Play + Apple-style **Join iOS Waitlist** button + "Coming soon on the App Store."), then Partner group with an "Android only" badge. Consistent widths, heights and spacing. iOS visitors see the waitlist first, Android visitors Play first.
 - **Sticky mobile CTA** (≤768 px): "Get SevaGo on Google Play" (Android) or "Join the iOS waitlist" (iPhone), shown after the hero, hidden over the download panel and while typing.
 - **Motion:** staggered entrances, hover lift on buttons/cards, floating phone, animated journey. All transform/opacity; everything stops under `prefers-reduced-motion`.

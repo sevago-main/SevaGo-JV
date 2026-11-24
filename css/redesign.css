@@ -100,20 +100,23 @@ html{scroll-padding-top:84px;}
 /* ── Service cards ─────────────────────────────────────── */
 #services{background:#0F1729;}
 .svc-wrap{max-width:1180px;margin:0 auto;}
-.svc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:2.6rem;}
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
-.svc-card{position:relative;display:flex;flex-direction:column;gap:.7rem;padding:1.6rem;border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);color:#fff;overflow:hidden;isolation:isolate;transition:transform .35s cubic-bezier(.22,.61,.36,1),border-color .35s,box-shadow .35s;}
-.svc-card::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),rgba(255,193,7,.22),transparent 60%);opacity:0;transition:opacity .35s;}
-.svc-card:hover,.svc-card:focus-visible{transform:translateY(-6px);border-color:rgba(255,193,7,.55);box-shadow:0 24px 60px rgba(0,0,0,.4);}
-.svc-card:hover::before{opacity:1;}
-.svc-ico{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:rgba(255,193,7,.14);border:1px solid rgba(255,193,7,.3);}
-.svc-ico svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;}
-.svc-card h3{font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;margin:.3rem 0 0;}
-.svc-card p{margin:0;font-size:.95rem;line-height:1.6;color:rgba(255,255,255,.74);}
-.svc-go{margin-top:auto;padding-top:.6rem;font-weight:700;font-size:.88rem;color:var(--gold);display:inline-flex;gap:.4rem;align-items:center;}
-.svc-go i{font-style:normal;transition:transform .3s;}
-.svc-card:hover .svc-go i{transform:translateX(5px);}
-.svc-card.accent{background:linear-gradient(160deg,rgba(255,193,7,.18),rgba(255,193,7,.04));border-color:rgba(255,193,7,.4);}
+#services .rd-title{font-size:clamp(1.8rem,3.4vw,2.6rem);margin:0 0 1.4rem;}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.svc-card{display:grid;grid-template-columns:minmax(0,1fr) 136px;align-items:center;gap:8px;min-height:190px;padding:20px;border-radius:12px;background:#16213E;color:#fff;overflow:hidden;}
+.svc-card.svc-earn{background:#0539A2;}
+.svc-text{display:flex;flex-direction:column;align-items:flex-start;gap:6px;align-self:stretch;}
+.svc-card h3{font-family:'Bricolage Grotesque',sans-serif;font-size:1.15rem;font-weight:700;margin:0;line-height:1.2;}
+.svc-card p{margin:0;font-size:.9rem;line-height:1.45;color:rgba(255,255,255,.78);}
+.svc-btn{margin-top:auto;display:inline-flex;align-items:center;min-height:40px;padding:0 20px;border-radius:999px;background:#fff;color:#16213E;font-weight:700;font-size:.9rem;text-decoration:none;transition:background .2s;}
+.svc-btn:hover{background:#FFC107;}
+.svc-btn:focus-visible{outline:2px solid #FFC107;outline-offset:3px;}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.svc-card .ill{width:136px;height:136px;margin:-8px -6px -8px 0;overflow:visible;transition:transform .35s cubic-bezier(.22,.61,.36,1);}
+.svc-card .ill .a,.svc-card .ill .b,.svc-card .ill .coin{transition:transform .35s cubic-bezier(.22,.61,.36,1);transform-box:fill-box;transform-origin:center;}
+.svc-card:hover .ill{transform:translateY(-3px);}
+.svc-card:hover .ill .a{transform:translateX(-3px) rotate(-3deg);}
+.svc-card:hover .ill .b{transform:translateX(3px) rotate(3deg);}
+.svc-card:hover .ill .coin{transform:translateY(-4px);}
 
 /* ── Download panel: two app cards, consistent sizing ──── */
 .dl{max-width:480px;}
@@ -157,6 +160,8 @@ html{scroll-padding-top:84px;}
 @media(max-width:620px){
   .rd-section{padding:4rem 5%;}
   .svc-grid{grid-template-columns:1fr;}
+  .svc-card{min-height:170px;grid-template-columns:minmax(0,1fr) 100px;}
+  .svc-card .ill{width:100px;height:100px;}
   .jr-step[aria-selected="true"]{transform:none;}
   .hero-art .helper{display:none;}
 }
@@ -167,5 +172,6 @@ html{scroll-padding-top:84px;}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
   .reveal,.stagger > *{opacity:1!important;transform:none!important;}
   .phone,.float-chip{animation:none!important;}
+  .svc-card .ill,.svc-card .ill *{transition:none!important;transform:none!important;}
   .hero-art .helper{display:none;}
 }
