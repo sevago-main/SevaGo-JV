@@ -169,11 +169,8 @@ if (require.main === module) {
   for (const [rel, content] of Object.entries(out)) {
     const f = path.join(ROOT, rel);
     const cur = fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : null;
-    if (check) { if (cur === null || cur.replace(/
-/g, '
-') !== content.replace(/
-/g, '
-')) { console.error('out of date:', rel); bad++; } continue; }
+    const lf = (s) => s.split(String.fromCharCode(13, 10)).join(String.fromCharCode(10));
+    if (check) { if (cur === null || lf(cur) !== lf(content)) { console.error('out of date:', rel); bad++; } continue; }
     fs.mkdirSync(path.dirname(f), { recursive: true });
     fs.writeFileSync(f, content);
   }
