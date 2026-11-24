@@ -1,6 +1,7 @@
 'use strict';
 const { safeEqual, csvCell, send } = require('../_lib/security');
 const { getDb } = require('../_lib/db');
+const { classifyDbError, statusFor } = require('../_lib/errors');
 
 const COLUMNS = [
   'id', 'created_at', 'name', 'contact_type', 'contact_normalized', 'city',
@@ -51,6 +52,13 @@ function makeHandler(deps = {}) {
     const url = new URL(req.url || '/', 'http://localhost');
     const db = getDatabase();
     try {
+      if (url.searchParams.get('view') === 'list') {
+        const limit = Math.min(Math.max(parseInt(url.searchParams.get('limit'), 10) || 100, 1), 500);
+        const rows = await db.query(
+          'SELECT id, created_at, name, contact_type, contact_normalized, city, source FROM ios_waitlist ORDER BY id DESC LIMIT ' + limit);
+        const total = await db.query('SELECT count(*)::int AS n FROM ios_waitlist');
+        return send(res, 200, { ok: true, total: total.rows[0].n, shown: rows.rows.length, rows: rows.rows });
+      }
       if (url.searchParams.get('view') === 'summary') {
         const days = Math.min(Math.max(parseInt(url.searchParams.get('days'), 10) || 30, 1), 365);
         const ev = await db.query(
@@ -78,8 +86,9 @@ function makeHandler(deps = {}) {
         'Content-Disposition': `attachment; filename="sevago-ios-waitlist-${stamp}.csv"`,
       });
     } catch (err) {
-      console.error('export failed', err && (err.code || err.message));
-      return send(res, 500, { ok: false, error: 'server_error' });
+      const kind = classifyDbError(err);
+      console.error('export failed:', kind);
+      return send(res, statusFor(kind), { ok: false, error: kind });
     }
   };
 }

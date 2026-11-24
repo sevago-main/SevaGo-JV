@@ -48,6 +48,25 @@
     return Array.prototype.map.call(a, function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
   }
 
+  var CONTACT_FALLBACK = ' If it keeps happening, email team@sevago.co.in.';
+  /** Copy shown after a successful submit. */
+  function successCopy(status) {
+    return status === 'duplicate'
+      ? { title: "You're already on the waitlist.", text: "We already have your details. We'll notify you when SevaGo launches on iOS." }
+      : { title: "You're on the list.", text: "We'll notify you when SevaGo launches on iOS." };
+  }
+  /** Human-readable reason for a failed submit. status 0 = no response (offline / blocked). */
+  function errorMessage(status, body) {
+    var code = body && body.error;
+    if (!status) return "We couldn't reach SevaGo. Check your internet connection and try again.";
+    if (status === 429 || code === 'rate_limited') return 'Too many attempts from this device. Please wait a few minutes and try again.';
+    if (code === 'too_fast') return 'That was quick. Please check your details and press the button again.';
+    if (status === 403 || code === 'forbidden') return 'This form only works on sevago.co.in. Please open the website and try again.';
+    if (status === 415 || status === 400) return 'Your details could not be read. Please refresh the page and try again.';
+    if (status === 503) return 'Sign-ups are temporarily unavailable on our side. Your details were not saved. Please try again later.' + CONTACT_FALLBACK;
+    return "We couldn't save your details just now. Please try again." + CONTACT_FALLBACK;
+  }
+
   function init(doc) {
     var panel = doc.getElementById('downloadPanel');
     if (!panel) return;
@@ -194,24 +213,25 @@
           if (res.body && res.body.ok) {
             track(res.body.status === 'duplicate' ? 'waitlist_duplicate' : 'waitlist_success');
             try { localStorage.setItem('sg_ios_wl', '1'); } catch (e) { /* ignore */ }
-            doc.getElementById('successTitle').textContent = res.body.status === 'duplicate' ? 'You’re already on the list' : 'You’re on the list!';
+            var sm = successCopy(res.body.status);
+            doc.getElementById('successTitle').textContent = sm.title;
+            doc.getElementById('successText').textContent = sm.text;
             form.hidden = true;
             success.hidden = false;
             success.focus();
             return;
           }
           track('waitlist_error');
-          if (res.status === 422 && res.body.fields) {
+          if (res.status === 422 && res.body && res.body.fields) {
             Object.keys(res.body.fields).forEach(function (k) { fieldError(k, res.body.fields[k]); });
-          } else if (res.status === 429) {
-            statusEl.textContent = 'Too many attempts. Please try again in a few minutes.';
+            var bad = form.querySelector('[aria-invalid="true"]'); if (bad) bad.focus();
           } else {
-            statusEl.textContent = 'Something went wrong. Please try again.';
+            statusEl.textContent = errorMessage(res.status, res.body);
           }
         })
         .catch(function () {
           track('waitlist_error');
-          statusEl.textContent = 'Network problem. Please check your connection and try again.';
+          statusEl.textContent = errorMessage(0, null);
         })
         .then(function () {
           submitBtn.disabled = false;
@@ -225,5 +245,5 @@
     else init(document);
   }
 
-  return { detectPlatform: detectPlatform, resolveIosConfig: resolveIosConfig, looksLikeContact: looksLikeContact };
+  return { detectPlatform: detectPlatform, resolveIosConfig: resolveIosConfig, looksLikeContact: looksLikeContact, successCopy: successCopy, errorMessage: errorMessage };
 });

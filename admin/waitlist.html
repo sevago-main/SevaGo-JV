@@ -35,6 +35,7 @@ dt{color:var(--text)}dd{margin:0;font-weight:700;text-align:right}
     <div class="row">
       <button id="csv" type="button">Download CSV</button>
       <button id="sum" type="button" class="secondary">Show funnel (30 days)</button>
+      <button id="lst" type="button" class="secondary">View latest sign-ups</button>
     </div>
     <p id="msg" role="status" aria-live="polite"></p>
   </section>
@@ -42,6 +43,10 @@ dt{color:var(--text)}dd{margin:0;font-weight:700;text-align:right}
   <section class="card" id="summary" hidden aria-labelledby="sum-h">
     <h2 id="sum-h" style="margin:0 0 .8rem;font-size:1.1rem">Funnel (unique sessions)</h2>
     <dl id="sumList"></dl>
+  </section>
+  <section class="card" id="list" hidden aria-labelledby="lst-h" style="overflow:auto">
+    <h2 id="lst-h" style="margin:0 0 .8rem;font-size:1.1rem">Latest sign-ups <span id="lstCount" style="font-weight:400;color:var(--text)"></span></h2>
+    <table id="lstTable" style="width:100%;border-collapse:collapse;font-size:.85rem"><thead><tr><th align="left">#</th><th align="left">When</th><th align="left">Name</th><th align="left">Contact</th><th align="left">City</th></tr></thead><tbody></tbody></table>
   </section>
 </main>
 <script>
@@ -55,7 +60,7 @@ dt{color:var(--text)}dd{margin:0;font-weight:700;text-align:right}
       .then(function (r) {
         if (r.status === 401) throw new Error('Wrong token.');
         if (r.status === 429) throw new Error('Too many wrong attempts. Try again in 15 minutes.');
-        if (r.status === 503) throw new Error('Admin export is not configured on the server.');
+        if (r.status === 503) throw new Error('Not configured: set ADMIN_EXPORT_TOKEN (and DATABASE_URL) in Vercel, then redeploy.');
         if (!r.ok) throw new Error('Server error (' + r.status + ').');
         return r;
       });
@@ -68,6 +73,20 @@ dt{color:var(--text)}dd{margin:0;font-weight:700;text-align:right}
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
       msg.textContent = 'Downloaded.';
+    }).catch(function (e) { if (e && e.message) msg.textContent = e.message; });
+  });
+  document.getElementById('lst').addEventListener('click', function () {
+    call('?view=list&limit=100').then(function (r) { return r.json(); }).then(function (j) {
+      var tb = document.querySelector('#lstTable tbody'); tb.textContent = '';
+      j.rows.forEach(function (r) {
+        var tr = document.createElement('tr');
+        [r.id, new Date(r.created_at).toLocaleString(), r.name, r.contact_normalized, r.city].forEach(function (v) {
+          var td = document.createElement('td'); td.style.padding = '.35rem .5rem .35rem 0'; td.style.borderTop = '1px solid rgba(255,255,255,.1)'; td.textContent = v; tr.appendChild(td);
+        });
+        tb.appendChild(tr);
+      });
+      document.getElementById('lstCount').textContent = '(' + j.shown + ' of ' + j.total + ')';
+      document.getElementById('list').hidden = false; msg.textContent = '';
     }).catch(function (e) { if (e && e.message) msg.textContent = e.message; });
   });
   document.getElementById('sum').addEventListener('click', function () {
