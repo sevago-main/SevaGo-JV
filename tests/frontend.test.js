@@ -57,7 +57,7 @@ test('index.html wires the panel: IDs used by download.js exist and Play link is
     'waitlistStatus', 'waitlistSubmit', 'iosSub', 'successTitle', 'playBtn', 'err-name', 'err-contact', 'err-city', 'err-consent']) {
     assert.ok(html.includes('id="' + id + '"'), 'missing #' + id);
   }
-  assert.ok(html.includes('play.google.com/store/apps/details?id=com.app.initio.sevago'));
+  assert.ok(html.includes('play.google.com/store/apps/details?id=com.sevago.app'));
   assert.ok(html.includes('/js/download.js') && html.includes('/css/download.css'));
   assert.ok(html.includes('name="website"') && html.includes('name="consent"'));
 });

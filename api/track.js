@@ -4,7 +4,7 @@ const { shortText } = require('./_lib/validate');
 const { getDb } = require('./_lib/db');
 
 const EVENTS = new Set([
-  'download_view', 'play_store_click', 'app_store_click',
+  'download_view', 'play_store_click', 'partner_play_click', 'sticky_cta_click', 'app_store_click', 'waitlist_cta_click',
   'waitlist_open', 'waitlist_start', 'waitlist_submit', 'waitlist_success',
   'waitlist_duplicate', 'waitlist_error',
 ]);

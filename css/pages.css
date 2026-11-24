@@ -1,0 +1,54 @@
+/* Styles for the generated landing pages (coimbatore/*). Same tokens as the home page. */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--blue:#0539A2;--gold:#FFC107;--navy:#16213E;--navy2:#0F1729;--text:rgba(255,255,255,.84);--dim:rgba(255,255,255,.66);--line:rgba(255,255,255,.12);}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--navy2);color:#fff;line-height:1.65;}
+a{color:var(--gold);}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px;}
+.skip-link{position:absolute;left:1rem;top:-100px;background:var(--gold);color:var(--navy);font-weight:700;padding:.7rem 1rem;border-radius:10px;z-index:100;}
+.skip-link:focus{top:1rem;}
+.wrap{max-width:860px;margin:0 auto;padding:0 5%;}
+.site-nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:.8rem 5%;background:rgba(5,57,162,.96);border-bottom:1px solid var(--line);}
+.brand{display:flex;align-items:center;gap:.6rem;color:#fff;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.35rem;}
+.brand img{border-radius:9px;}
+.site-nav nav{display:flex;gap:1.3rem;flex-wrap:wrap;}
+.site-nav nav a{color:#fff;text-decoration:none;font-size:.95rem;opacity:.9;}
+.site-nav nav a:hover,.site-nav nav a[aria-current]{color:var(--gold);opacity:1;}
+.hero{padding:3.5rem 0 2.5rem;background:radial-gradient(800px 320px at 85% -10%,rgba(255,193,7,.16),transparent 65%),linear-gradient(180deg,var(--blue),#0a2f80);border-bottom:1px solid var(--line);}
+.crumbs{font-size:.85rem;color:var(--dim);margin-bottom:1rem;}
+.crumbs a{color:#fff;text-decoration:none;}
+.crumbs span[aria-hidden]{margin:0 .45rem;}
+h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2rem,5.4vw,3.3rem);line-height:1.05;letter-spacing:-.03em;font-weight:800;margin-bottom:1rem;}
+.lead{font-size:1.1rem;color:var(--text);max-width:680px;margin-bottom:.8rem;}
+.content{padding-top:2rem;padding-bottom:4rem;}
+.block{padding:1.8rem 0;border-top:1px solid var(--line);}
+.block:first-child{border-top:0;}
+.block h2,.cta h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.45rem;letter-spacing:-.015em;margin-bottom:.8rem;}
+.block p{color:var(--text);margin-bottom:.8rem;}
+.block ul,.block ol{margin:.4rem 0 .6rem 1.3rem;color:var(--text);}
+.block li{margin-bottom:.45rem;}
+.block li::marker{color:var(--gold);}
+.cta{margin:2rem 0;padding:1.6rem;border-radius:22px;background:linear-gradient(160deg,rgba(255,193,7,.16),rgba(255,193,7,.04));border:1px solid rgba(255,193,7,.4);}
+.cta p{color:var(--text);margin-bottom:1rem;}
+.cta-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:.9rem;}
+.btn{display:inline-flex;align-items:center;gap:.6rem;min-height:52px;padding:.7rem 1.3rem;border-radius:14px;font-weight:700;text-decoration:none;transition:transform .25s,box-shadow .25s,background .25s;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.35);}
+.btn-gold{background:var(--gold);color:var(--navy);}
+.btn-dark{background:#000;color:#fff;border:1px solid rgba(255,255,255,.4);}
+body.is-ios .btn-ios{order:-1;}
+.cta .cta-note{font-size:.88rem;color:var(--dim);margin:0;}
+.faq details{border-bottom:1px solid var(--line);padding:.9rem 0;}
+.faq summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:1rem;}
+.faq summary::after{content:'+';color:var(--gold);font-size:1.3rem;line-height:1;}
+.faq details[open] summary::after{content:'–';}
+.faq details p{margin:.6rem 0 0;color:var(--text);}
+.related ul{list-style:none;margin:0;display:grid;gap:.5rem;}
+.related a{display:block;padding:.8rem 1rem;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:#fff;}
+.related a:hover{border-color:var(--gold);color:var(--gold);}
+.updated{font-size:.82rem;color:var(--dim);margin-top:1.5rem;}
+.footer{border-top:1px solid var(--line);padding:2rem 0;color:var(--dim);font-size:.9rem;}
+.f-links{display:flex;flex-wrap:wrap;gap:1.2rem;margin-bottom:.8rem;}
+.f-links a{color:var(--text);text-decoration:none;}
+.f-links a:hover{color:var(--gold);}
+@media(max-width:560px){.btn{width:100%;justify-content:center;}.site-nav nav{gap:.9rem;}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none!important;}}
