@@ -71,6 +71,9 @@
       } catch (e) { /* tracking must never break the page */ }
     }
 
+    window.SevaTrack = track;
+    window.SevaPlatform = platform;
+
     var playCard = panel.querySelector('.dl-play');
     var iosCard = panel.querySelector('.dl-ios');
     var detect = doc.getElementById('dlDetect');
@@ -121,14 +124,15 @@
       .then(function (cfg) { if (cfg) applyIosConfig(cfg); })
       .catch(function () { /* keep waitlist default */ });
 
-    track('download_view');
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.SevaOpenWaitlist = function () {
+      panel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      if (iosMode === 'appstore') { track('app_store_click'); window.open(storeBtn.href, '_blank', 'noopener'); return; }
+      if (!openBtn.hidden) { openBtn.click(); }
+      else if (!form.hidden) { var f = form.querySelector('input[name="name"]'); if (f) f.focus({ preventScroll: true }); }
+    };
 
-    panel.addEventListener('click', function (e) {
-      var a = e.target.closest ? e.target.closest('a') : null;
-      if (!a) return;
-      if (a.id === 'playBtn') track('play_store_click');
-      if (a.id === 'appStoreBtn') track('app_store_click');
-    });
+    track('download_view');
 
     openBtn.addEventListener('click', function () {
       track('waitlist_open');

@@ -3,9 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "description": "SevaGo marketing site with iOS waitlist API (Vercel serverless + PostgreSQL)",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-    "test": "node --test tests/validate.test.js tests/waitlist.test.js tests/admin-track.test.js tests/frontend.test.js"
+    "test": "node --test tests/validate.test.js tests/waitlist.test.js tests/admin-track.test.js tests/frontend.test.js tests/seo.test.js",
+    "build:seo": "node scripts/build-seo.js",
+    "harvest:keywords": "node scripts/keyword-harvest.js"
   },
   "dependencies": {
     "pg": "^8.11.5"

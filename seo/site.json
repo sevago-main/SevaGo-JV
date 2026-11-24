@@ -1,0 +1,17 @@
+{
+  "origin": "https://sevago.co.in",
+  "orgName": "SevaGo Technologies Private Limited",
+  "brand": "SevaGo",
+  "email": "team@sevago.co.in",
+  "playPoster": "https://play.google.com/store/apps/details?id=com.sevago.app&hl=en_IN",
+  "playPartner": "https://play.google.com/store/apps/details?id=in.sevago.partner&hl=en_IN",
+  "verification": {
+    "google": "",
+    "bing": ""
+  },
+  "staticPages": [
+    { "path": "/privacy", "lastmod": "2026-10-21", "priority": "0.3" },
+    { "path": "/terms", "lastmod": "2026-10-21", "priority": "0.3" },
+    { "path": "/careers", "lastmod": "2026-09-13", "priority": "0.5" }
+  ]
+}
